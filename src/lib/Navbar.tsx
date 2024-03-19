@@ -10,10 +10,10 @@ const Navbar: NextPage<Props> = ({}) => {
   return (
     <div className="bg-red-300 container mx-auto ">
       <nav className="bg-white border-gray-200  ">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 h-[83px]">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
           <a
             href="https://flowbite.com/"
-            className="flex items-center space-x-3 rtl:space-x-reverse"
+            className="flex items-center space-x-3 rtl:space-x-reverse py-5"
           >
             <span className="self-center text-5xl font-semibold whitespace-nowrap clicker-script-regular ">
               That&apos;s Vigor
@@ -22,7 +22,7 @@ const Navbar: NextPage<Props> = ({}) => {
           <button
             data-collapse-toggle="navbar-default"
             type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
             aria-controls="navbar-default"
             aria-expanded="false"
           >
@@ -43,21 +43,24 @@ const Navbar: NextPage<Props> = ({}) => {
               />
             </svg>
           </button>
-          <div className="hidden w-full md:block md:w-auto" id="navbar-default">
+          <div
+            className="hidden w-full lg:block lg:w-auto py-[31px]"
+            id="navbar-default"
+          >
             <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white ">
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 text-gray-900 rounded-none md:bg-transparent md:p-0 border-b-2 border-[#ca1515]"
+                  className="block py-2 px-3 text-gray-900 rounded-none md:bg-transparent md:p-0 border-b-2 border-[#ca1515] text-sm"
                   aria-current="page"
                 >
-                  Home
+                  HOME
                 </a>
               </li>
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent"
+                  className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
                 >
                   WOMEN’S
                 </a>
@@ -65,7 +68,7 @@ const Navbar: NextPage<Props> = ({}) => {
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent"
+                  className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
                 >
                   MEN’S
                 </a>
@@ -73,7 +76,7 @@ const Navbar: NextPage<Props> = ({}) => {
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 text-gray-900  hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent"
+                  className="block py-2 px-3 text-gray-900  hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
                 >
                   SHOP
                 </a>
@@ -81,7 +84,7 @@ const Navbar: NextPage<Props> = ({}) => {
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent"
+                  className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
                 >
                   PAGES
                 </a>
@@ -89,7 +92,7 @@ const Navbar: NextPage<Props> = ({}) => {
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent"
+                  className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
                 >
                   BLOG
                 </a>
@@ -97,15 +100,15 @@ const Navbar: NextPage<Props> = ({}) => {
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent"
+                  className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
                 >
                   CONTACT
                 </a>
               </li>
             </ul>
           </div>
-          <div className="header-right space-x-5 flex items-center">
-            <div className="inline-block">
+          <div className="header-right space-x-5 lg:flex items-center hidden py-[28px]">
+            <div className="inline-block align-middle">
               <a
                 href="#"
                 className="block py-2 px-3 text-gray-900 rounded md:p-0 text-xs"
