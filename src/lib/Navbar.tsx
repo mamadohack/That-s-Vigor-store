@@ -26,7 +26,7 @@ const Navbar: NextPage<Props> = ({}) => {
             aria-controls="navbar-default"
             aria-expanded="false"
           >
-            <span className="sr-only">Open main menu</span>
+            <span className="sr-only"></span>
             <svg
               className="w-5 h-5"
               aria-hidden="true"
