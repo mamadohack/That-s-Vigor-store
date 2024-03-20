@@ -8,14 +8,14 @@ interface Props {}
 
 const Navbar: NextPage<Props> = ({}) => {
   return (
-    <div className="bg-red-300 container mx-auto ">
+    <div className=" container mx-auto px-2 sm:p-0 ">
       <nav className="bg-white border-gray-200  ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
           <a
             href="https://flowbite.com/"
             className="flex items-center space-x-3 rtl:space-x-reverse py-5"
           >
-            <span className="self-center text-5xl font-semibold whitespace-nowrap clicker-script-regular ">
+            <span className="self-center text-[50px] font-semibold whitespace-nowrap cookie-regular ">
               That&apos;s Vigor
             </span>
           </a>
