@@ -4,6 +4,7 @@ import ProductList from "@/lib/ProductList";
 import { ProductListAPiType } from "@/lib/types";
 import Banner from "@/lib/Banner";
 import Discount from "@/lib/Discount";
+import Footer from "@/lib/Footer";
 export const ProductListAPi: ProductListAPiType[] = [
   {
     id: 1,
@@ -74,6 +75,7 @@ export default function Home() {
       <ProductList />
       <Banner />
       <Discount/>
+      <Footer />
 
     </main>
   );

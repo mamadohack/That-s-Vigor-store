@@ -5,8 +5,8 @@ import Navbar from "@/lib/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "MY STORE",
-  description: "MY STORE APP",
+  title: "That's Vigor",
+  description: "That's Vigor APP",
 };
 
 export default function RootLayout({
