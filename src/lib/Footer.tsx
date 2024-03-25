@@ -2,6 +2,9 @@ import { NextPage } from "next";
 import Image from "next/image";
 import { FaInstagram } from "react-icons/fa";
 import Link from "next/link";
+import { FaFacebookF } from "react-icons/fa6";
+import { FaXTwitter } from "react-icons/fa6";
+import { FaYoutube } from "react-icons/fa";
 
 interface Props {}
 
@@ -94,7 +97,7 @@ const Footer: NextPage<Props> = ({}) => {
           </div>
         </div>
       </div>
-      <div className="my-10 grid grid-cols-6 px-20 gap-10">
+      <div className="my-10 grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 sm:px-10 px-5 md:px-20 gap-10">
         <div className="col-span-2 ">
           <h2 className="cookie-regular text-[40px]">That&apos;s Vigor</h2>
           <p className="text-sm text-gray-600">
@@ -137,25 +140,8 @@ const Footer: NextPage<Props> = ({}) => {
           </div>
         </div>
         <div className="col-span-1">
-          <h2 className="font-semibold mt-5">ACCOUNT</h2>
-          <ul className="space-y-2 text-gray-500 mt-5 text-sm">
-            <li>
-              <Link href="#">My Account</Link>
-            </li>
-            <li>
-              <Link href="#">Orders Tracking</Link>
-            </li>
-            <li>
-              <Link href="#">Checkout</Link>
-            </li>
-            <li>
-              <Link href="#">Wishlist</Link>
-            </li>
-          </ul>
-        </div>
-        <div className="col-span-1">
-          <h2 className="font-semibold mt-5">QUICK LINKS</h2>
-          <ul className="space-y-2 text-gray-500 mt-5 text-sm">
+          <h2 className="font-semibold mt-5 text-lg">QUICK LINKS</h2>
+          <ul className="space-y-2 text-gray-500 mt-3 text-sm">
             <li>
               <Link href="#">About</Link>
             </li>
@@ -170,7 +156,56 @@ const Footer: NextPage<Props> = ({}) => {
             </li>
           </ul>
         </div>
+        <div className="col-span-1">
+          <h2 className="font-semibold mt-5 text-lg">ACCOUNT</h2>
+          <ul className="space-y-2 text-gray-500 mt-3 text-sm">
+            <li>
+              <Link href="#">My Account</Link>
+            </li>
+            <li>
+              <Link href="#">Orders Tracking</Link>
+            </li>
+            <li>
+              <Link href="#">Checkout</Link>
+            </li>
+            <li>
+              <Link href="#">Wishlist</Link>
+            </li>
+          </ul>
+        </div>
+        <div className="col-span-2">
+          <h2 className="font-semibold mt-5 text-lg">NEWSLETTER</h2>
+          <form className="mt-3 relative ">
+            <input
+              className="h-[52px] border rounded-full w-full p-3 outline-none focus:border-red-700 duration-150 pe-[31%] text-sm"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+            />
+            <button className="absolute top-0 right-0 rounded-full py-2 px-3 w-[30%] h-full bg-red-700 text-white duration-200 hover:opacity-80 font-semibold text-sm">
+              SUBSCRIBE
+            </button>
+          </form>
+          <div className="flex items-center mt-5 gap-3">
+            <Link href="#" className="p-3 bg-gray-200 rounded-full text-sm">
+              <FaFacebookF />
+            </Link>
+            <Link href="#" className="p-3 bg-gray-200 rounded-full text-sm">
+              <FaXTwitter />
+            </Link>
+            <Link href="#" className="p-3 bg-gray-200 rounded-full text-sm">
+              <FaYoutube />
+            </Link>
+            <Link href="#" className="p-3 bg-gray-200 rounded-full text-sm">
+              <FaInstagram />
+            </Link>
+          </div>
+        </div>
       </div>
+      <h3 className="sm:px-10 px-5 md:px-20 mt-5 border-t-2 text-center text-gray-600 py-3 text-sm">
+        Copyright © 2024 All rights reserved | This template is made by K_M
+      </h3>
     </section>
   );
 };
