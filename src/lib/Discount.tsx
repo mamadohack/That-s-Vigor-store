@@ -3,7 +3,13 @@ import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Countdown, { CountdownApi } from "react-countdown";
+import Countdown from "react-countdown";
+import { IoCarSportSharp } from "react-icons/io5";
+import { FaRegMoneyBillAlt } from "react-icons/fa";
+import { MdSupportAgent } from "react-icons/md";
+import { FaHeadphonesSimple } from "react-icons/fa6";
+
+
 
 interface Props {}
 
@@ -59,7 +65,7 @@ const Discount: NextPage<Props> = ({}) => {
           className="block w-full lg:w-1/2"
         ></Image>
         <div className="text-center w-full lg:w-1/2 bg-gray-100 z-[1]">
-          <div className="after:z-[-5] mt-20 after:content-[''] after:w-[183px] after:h-[183px] after:bg-white after:rounded-full after:absolute after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 relative">
+          <div className="after:z-[-5] mt-10 lg:mt-20 after:content-[''] after:w-[183px] after:h-[183px] after:bg-white after:rounded-full after:absolute after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 relative">
             <h4 className="text-sm -mb-4 z-[10]">DISCOUNT</h4>
             <h2 className="cookie-regular text-[60px] text-red-700 z-[10]">
               Summer 2024
@@ -74,12 +80,42 @@ const Discount: NextPage<Props> = ({}) => {
               renderer={renderer}
             />
           )}
-          <Link 
-          href="#"
-            className="mx-auto block mt-5 text-sm sm:text-base font-bold border-b-2 border-[#ca1515] max-w-fit z-[20]"
+          <Link
+            href="#"
+            className="mb-5 mx-auto block mt-5 text-sm sm:text-base font-bold border-b-2 border-[#ca1515] max-w-fit z-[20]"
           >
             SHOP NOW
           </Link>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-10 gap-10 px-5">
+        <div className="relative ps-16 col-span-1">
+          <span className="absolute top-0 left-0">
+            <IoCarSportSharp className="text-5xl text-red-700" />
+          </span>
+          <h1 className="font-semibold mb-[2px] ">Free Shipping</h1>
+          <p className="text-sm text-gray-600">For all oder over $99</p>
+        </div>
+        <div className="relative ps-16 col-span-1">
+          <span className="absolute top-0 left-0">
+            <FaRegMoneyBillAlt className="text-5xl text-red-700" />
+          </span>
+          <h1 className="font-semibold mb-[2px]">Money Back Guarantee</h1>
+          <p className="text-sm text-gray-600">If good have Problems</p>
+        </div>
+        <div className="relative ps-16 col-span-1">
+          <span className="absolute top-0 left-0">
+            <MdSupportAgent className="text-5xl text-red-700" />
+          </span>
+          <h1 className="font-semibold mb-[2px]">Online Support 24/7</h1>
+          <p className="text-sm text-gray-600">Dedicated support</p>
+        </div>
+        <div className="relative ps-16 col-span-1">
+          <span className="absolute top-0 left-0">
+            <FaHeadphonesSimple className="text-5xl text-red-700" />
+          </span>
+          <h1 className="font-semibold mb-[2px]">Payment Secure</h1>
+          <p className="text-sm text-gray-600">100% secure payment</p>
         </div>
       </div>
     </div>
