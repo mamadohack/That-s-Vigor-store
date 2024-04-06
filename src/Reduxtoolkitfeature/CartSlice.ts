@@ -60,19 +60,19 @@ export const CartSlice = createSlice({
   reducers: {
     addToCart(state, action) {
       const existingIndex = state.cartItems.findIndex(
-        (item) => item.id === action.payload.id
+        (item) => item.id === action.payload.product.id
       );
 
       if (existingIndex >= 0) {
         state.cartItems[existingIndex] = {
           ...state.cartItems[existingIndex],
-          cartQuantity: state.cartItems[existingIndex].cartQuantity + 1,
+          cartQuantity: state.cartItems[existingIndex].cartQuantity + action.payload.qty,
         };
         // toast.info("Increased product quantity", {
         //   position: "bottom-left",
         // });
       } else {
-        let tempProductItem = { ...action.payload, cartQuantity: 1 };
+        let tempProductItem = { ...action.payload.product, cartQuantity: 1 };
         state.cartItems.push(tempProductItem);
         // toast.success("Product added to cart", {
         //   position: "bottom-left",

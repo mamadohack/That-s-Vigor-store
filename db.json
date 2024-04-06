@@ -66,51 +66,8 @@
   },
   "cart": {
     "cartItems": [
-      {
-        "id": 2,
-        "title": "Flowy striped skirt",
-        "image": "/img/product/product-2.jpg",
-        "rating": "***",
-        "price": 49,
-        "cartQuantity": 35
-      },
-      {
-        "id": 6,
-        "title": "Tropical Kimono",
-        "image": "/img/product/product-6.jpg",
-        "rating": "***",
-        "price": 39,
-        "condition": "sale",
-        "cartQuantity": 3
-      },
-      {
-        "id": 8,
-        "title": "Water resistant backpack",
-        "image": "/img/product/product-8.jpg",
-        "rating": "****",
-        "price": 49,
-        "condition": "sale",
-        "cartQuantity": 2
-      },
-      {
-        "id": 1,
-        "title": "Buttons tweed blazer",
-        "image": "/img/product/product-1.jpg",
-        "rating": "****",
-        "price": 59,
-        "condition": "new",
-        "cartQuantity": 2
-      },
-      {
-        "id": 5,
-        "title": "Fit micro corduroy shirt",
-        "image": "/img/product/product-5.jpg",
-        "rating": "*****",
-        "price": 59,
-        "cartQuantity": 1
-      }
     ],
-    "totalQuantity": 43,
-    "totalPrice": 2107
+    "totalQuantity": 57,
+    "totalPrice": 2883
   }
 }

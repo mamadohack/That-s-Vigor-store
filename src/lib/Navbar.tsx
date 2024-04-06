@@ -12,6 +12,7 @@ import Link from "next/link";
 interface Props {}
 
 const Navbar: NextPage<Props> = ({}) => {
+  console.log("navbar rendered");
   const [showCart, setShowCart] = useState(false);
   const background = useRef<HTMLDivElement | null>(null);
   const cart = useSelector((state: RootState) => state.cart);
@@ -162,7 +163,7 @@ const Navbar: NextPage<Props> = ({}) => {
             </div>
           </nav>
         </div>
-        <div className="bg-white absolute top-full right-[3%] p-3 space-y-3">
+        <div className="bg-white absolute top-full right-[3%] p-3 space-y-3 hidden">
           <h2 className="text-lg font-semibold">Shopping Cart </h2>
           <div className="items"></div>
           <div className="flex justify-between items-center">
