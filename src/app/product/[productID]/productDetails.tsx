@@ -8,47 +8,105 @@ import { AppDispatch, RootState } from "@/store";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import Size from "@/lib/Size";
-import {
-  addToCart,
-  getTotals,
-  sendUserCartinfo,
-} from "@/Reduxtoolkitfeature/CartSlice";
+import { FreeMode, Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper as swiper } from "swiper/types";
+import { Thumbs } from "swiper/modules";
+import "swiper/swiper-bundle.css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "@/app/globals.css";
+import SlideNextButton from "@/lib/SlideNextButton";
+import SlidePrevButton from "@/lib/SlidePrevButton";
+import ImageSlide from "@/lib/ImageSlide";
+
+import { sendUserCartinfo } from "@/Reduxtoolkitfeature/CartSlice";
 import { useRef, useState } from "react";
 interface Props {
   productData: ProductListAPiType;
 }
 
-// export const postUserCartItems = async (item: any) => {
-//   try {
-//     const res = await fetch(`http://localhost:9000/cart`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(item),
-//     });
-//     const data = await res.json();
-//     console.log(item);
-//   } catch (error) {
-//     console.log("error at adding product to cart (services) => " + error);
-//   }
-// };
 const ProductDetails: NextPage<Props> = ({ productData }) => {
+  const [thumbsSwiper, setThumbsSwiper] = useState<swiper | null>(null);
+  const [controlledSwiper, setControlledSwiper] = useState<swiper | null>(null);
   const dispatch = useDispatch<AppDispatch>();
   const cart = useSelector((state: RootState) => state.cart);
   const inputQTY = useRef<HTMLInputElement | null>(null);
   const [state, setState] = useState({ price: productData.price, qty: 1 });
+  const slides = productData.image.map((img, index) => (
+    <SwiperSlide key={index}>
+      <Image
+        src={img}
+        width={350}
+        height={466}
+        alt="img"
+        className="object-cover h-full w-full object-top "
+      ></Image>
+    </SwiperSlide>
+  ));
+  const slidesThumb = productData.image.map((img, index) => (
+    <SwiperSlide key={index}>
+      {/* <ImageSlide img={img}></ImageSlide> */}
+      <Image
+        src={img}
+        width={350}
+        height={466}
+        alt="img"
+        priority
+        className="object-contain ms-auto block h-[80px] w-[80px] "
+      ></Image>
+    </SwiperSlide>
+  ));
   return (
     <main>
-      <div className="container mx-auto flex px-10 flex-wrap flex-col md:flex-row mb-20">
-        <div className="w-full md:w-1/2">
-          <Image
-            src={productData.image}
+      <div className="container mx-auto flex px-10 flex-wrap flex-col md:flex-row mb-20 my-10">
+        <div className="w-full md:w-1/2 flex h-[500px] gap-3 px-5 relative x ">
+          <SlideNextButton thumbsSwiper={thumbsSwiper}></SlideNextButton>
+          <SlidePrevButton thumbsSwiper={thumbsSwiper}></SlidePrevButton>
+          <Swiper
+            onSwiper={setThumbsSwiper}
+            loop={true}
+            slidesPerView={5}
+            freeMode={true}
+            watchSlidesProgress={true}
+            modules={[FreeMode, Thumbs]}
+            direction="vertical"
+            className=" w-[70px] mySwiper"
+          >
+            {slidesThumb}
+          </Swiper>
+
+          {/* <Swiper
+            onSwiper={setThumbsSwiper}
+            loop={true}
+            spaceBetween={10}
+            slidesPerView={4}
+            freeMode={true}
+            watchSlidesProgress={true}
+            modules={[FreeMode, Thumbs]}
+            direction="vertical"
+            className="mySwiper w-[30%]"
+          >
+            {slidesThumb}
+          </Swiper> */}
+          {/* <Image
+            src={productData.image[productData.image.length - productData.id]}
             width={350}
             height={466}
             alt="img"
             className="object-cover rounded-md  mx-auto"
-          ></Image>
+          ></Image> */}
+          <Swiper
+            loop={true}
+            spaceBetween={50}
+            slidesPerView={1}
+            navigation={true}
+            thumbs={{ swiper: thumbsSwiper }}
+            modules={[FreeMode, Navigation, Thumbs]}
+            className=" w-[calc(100%-70px)] h-auto "
+          >
+            {slides}
+          </Swiper>
         </div>
         <div className=" w-full md:w-1/2 md:ps-5 lg:ps-0">
           <h2 className="text-2xl text-gray-900 font-semibold mt-10">
@@ -85,13 +143,13 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
               <span
                 className="block text-xl cursor-pointer hover:border-rose-400 border p-2 text-center border-transparent duration-150"
                 onClick={() => {
-                  if(state.qty > 1) {
-                     setState((p) => {
-                       return {
-                         qty: p.qty - 1,
-                         price: p.price - productData.price,
-                       };
-                     });
+                  if (state.qty > 1) {
+                    setState((p) => {
+                      return {
+                        qty: p.qty - 1,
+                        price: p.price - productData.price,
+                      };
+                    });
                   }
                   // if (+inputQTY.current!.value > 1) {
                   //   inputQTY.current!.value = (
@@ -134,7 +192,9 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
             <button
               className="p-3 bg-gray-700 text-white font-semibold text-sm rounded-lg "
               onClick={() => {
-                dispatch(sendUserCartinfo({ product:productData, qty:state.qty }));
+                dispatch(
+                  sendUserCartinfo({ product: productData, qty: state.qty })
+                );
               }}
             >
               Add to Cart

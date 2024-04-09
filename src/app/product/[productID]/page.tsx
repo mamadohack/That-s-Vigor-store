@@ -8,7 +8,9 @@ interface Props {
 }
 
 const Page: NextPage<Props> = async ({ params: { productID } }) => {
-  const response = await fetch(`http://localhost:9000/products/${productID}`);
+  const response = await fetch(`http://localhost:9000/products/${productID}`, {
+    cache: "no-store",
+  });
   const productData: ProductListAPiType = await response.json();
 
   return (

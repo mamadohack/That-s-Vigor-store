@@ -81,11 +81,37 @@
 
 :root {
   --swiper-navigation-size: 20px;
-  --swiper-navigation-color:red;
+  --swiper-navigation-color: red;
   /*
   --swiper-navigation-top-offset: 50%;
   --swiper-navigation-sides-offset: 10px;
   --swiper-navigation-color: var(--swiper-theme-color);
   */
 }
+
+
+   .x .swiper-button-prev,
+.x .swiper-button-next{
+  opacity: 0;
+  transition: 200ms ease-in;
+  background-color: white;
+  padding: 20px;
+  border-radius: 50%;
+  color: black;
+  font-weight: bold;
+  
+}
+.x .swiper:hover .swiper-button-prev,
+.x .swiper:hover .swiper-button-next{
+  opacity: 0.7;
+}
+.x .swiper:hover .swiper-button-prev:hover,
+.x .swiper:hover .swiper-button-next:hover{
+  opacity: 1;
+}
+
+.mySwiper .swiper-slide-thumb-active img {
+  border:1px solid black;
+}
+
 

@@ -7,7 +7,7 @@ import Discount from "@/lib/Discount";
 import Footer from "@/lib/Footer";
 
 export default async function Home() {
-  const response = await fetch("http://localhost:9000/products");
+  const response = await fetch("http://localhost:9000/products",{cache:"no-store"});
   const productsData: ProductListAPiType[] = await response.json();
 
   

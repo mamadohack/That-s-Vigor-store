@@ -3,7 +3,15 @@
     {
       "id": 1,
       "title": "Buttons tweed blazer",
-      "image": "/img/product/product-1.jpg",
+      "image": [
+        "/img/product/product-1.jpg",
+        "/img/product/product-2.jpg",
+        "/img/product/product-3.jpg",
+        "/img/product/product-4.jpg",
+        "/img/product/product-5.jpg",
+        "/img/product/product-6.jpg",
+        "/img/product/product-7.jpg",
+        "/img/product/product-8.jpg"],
       "rating": "****",
       "price": 59,
       "condition": "new"
@@ -11,14 +19,32 @@
     {
       "id": 2,
       "title": "Flowy striped skirt",
-      "image": "/img/product/product-2.jpg",
+      "image": [
+        "/img/product/product-1.jpg",
+        "/img/product/product-2.jpg",
+        "/img/product/product-3.jpg",
+        "/img/product/product-4.jpg",
+        "/img/product/product-5.jpg",
+        "/img/product/product-6.jpg",
+        "/img/product/product-7.jpg",
+        "/img/product/product-8.jpg"
+      ],
       "rating": "***",
       "price": 49
     },
     {
       "id": 3,
       "title": "Cotton T-Shirt",
-      "image": "/img/product/product-3.jpg",
+      "image": [
+        "/img/product/product-1.jpg",
+        "/img/product/product-2.jpg",
+        "/img/product/product-3.jpg",
+        "/img/product/product-4.jpg",
+        "/img/product/product-5.jpg",
+        "/img/product/product-6.jpg",
+        "/img/product/product-7.jpg",
+        "/img/product/product-8.jpg"
+      ],
       "rating": "**",
       "price": 59,
       "condition": "out"
@@ -26,21 +52,48 @@
     {
       "id": 4,
       "title": "Slim striped pocket shirt",
-      "image": "/img/product/product-4.jpg",
+      "image": [
+        "/img/product/product-1.jpg",
+        "/img/product/product-2.jpg",
+        "/img/product/product-3.jpg",
+        "/img/product/product-4.jpg",
+        "/img/product/product-5.jpg",
+        "/img/product/product-6.jpg",
+        "/img/product/product-7.jpg",
+        "/img/product/product-8.jpg"
+      ],
       "rating": "****",
       "price": 59
     },
     {
       "id": 5,
       "title": "Fit micro corduroy shirt",
-      "image": "/img/product/product-5.jpg",
+      "image": [
+        "/img/product/product-1.jpg",
+        "/img/product/product-2.jpg",
+        "/img/product/product-3.jpg",
+        "/img/product/product-4.jpg",
+        "/img/product/product-5.jpg",
+        "/img/product/product-6.jpg",
+        "/img/product/product-7.jpg",
+        "/img/product/product-8.jpg"
+      ],
       "rating": "*****",
       "price": 59
     },
     {
       "id": 6,
       "title": "Tropical Kimono",
-      "image": "/img/product/product-6.jpg",
+      "image": [
+        "/img/product/product-1.jpg",
+        "/img/product/product-2.jpg",
+        "/img/product/product-3.jpg",
+        "/img/product/product-4.jpg",
+        "/img/product/product-5.jpg",
+        "/img/product/product-6.jpg",
+        "/img/product/product-7.jpg",
+        "/img/product/product-8.jpg"
+      ],
       "rating": "***",
       "price": 39,
       "condition": "sale"
@@ -48,14 +101,32 @@
     {
       "id": 7,
       "title": "Contrasting sunglasses",
-      "image": "/img/product/product-7.jpg",
+      "image": [
+        "/img/product/product-1.jpg",
+        "/img/product/product-2.jpg",
+        "/img/product/product-3.jpg",
+        "/img/product/product-4.jpg",
+        "/img/product/product-5.jpg",
+        "/img/product/product-6.jpg",
+        "/img/product/product-7.jpg",
+        "/img/product/product-8.jpg"
+      ],
       "rating": "*",
       "price": 52
     },
     {
       "id": 8,
       "title": "Water resistant backpack",
-      "image": "/img/product/product-8.jpg",
+      "image": [
+        "/img/product/product-1.jpg",
+        "/img/product/product-2.jpg",
+        "/img/product/product-3.jpg",
+        "/img/product/product-4.jpg",
+        "/img/product/product-5.jpg",
+        "/img/product/product-6.jpg",
+        "/img/product/product-7.jpg",
+        "/img/product/product-8.jpg"
+      ],
       "rating": "****",
       "price": 49,
       "condition": "sale"
@@ -65,9 +136,8 @@
     "user": "one day best developer"
   },
   "cart": {
-    "cartItems": [
-    ],
-    "totalQuantity": 57,
-    "totalPrice": 2883
+    "cartItems": [],
+    "totalQuantity": 0,
+    "totalPrice": 0
   }
 }

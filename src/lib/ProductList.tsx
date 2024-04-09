@@ -76,7 +76,7 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
             <div key={product.id} className="space-y-2 group">
               <div className="relative h-[360px]">
                 <Image
-                  src={product.image}
+                  src={product.image[product.image.length - product.id]}
                   fill
                   alt={product.title}
                   className="object-cover bg-top"
@@ -94,9 +94,12 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
                   <button className="inline-block p-3 rounded-full bg-white text-xl translate-y-full group-hover:translate-y-0 duration-300 ease-in-out opacity-0 group-hover:opacity-100 delay-100 hover:bg-red-600 hover:text-white hover:rotate-[360deg]">
                     <LiaHeart />
                   </button>
-                  <button onClick={()=>{dispatch(
-                    sendUserCartinfo({ product: product, qty: 1 })
-                  );}} className="p-3 rounded-full bg-white text-xl translate-y-full group-hover:translate-y-0 duration-300 ease-in-out opacity-0 group-hover:opacity-100 delay-200 hover:bg-red-600 hover:text-white hover:rotate-[360deg]">
+                  <button
+                    onClick={() => {
+                      dispatch(sendUserCartinfo({ product: product, qty: 1 }));
+                    }}
+                    className="p-3 rounded-full bg-white text-xl translate-y-full group-hover:translate-y-0 duration-300 ease-in-out opacity-0 group-hover:opacity-100 delay-200 hover:bg-red-600 hover:text-white hover:rotate-[360deg]"
+                  >
                     <LiaShoppingBagSolid />
                   </button>
                 </div>
