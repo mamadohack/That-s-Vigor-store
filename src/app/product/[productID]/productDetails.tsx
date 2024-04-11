@@ -28,19 +28,19 @@ interface Props {
 
 const ProductDetails: NextPage<Props> = ({ productData }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<swiper | null>(null);
-  const [controlledSwiper, setControlledSwiper] = useState<swiper | null>(null);
   const dispatch = useDispatch<AppDispatch>();
   const cart = useSelector((state: RootState) => state.cart);
   const inputQTY = useRef<HTMLInputElement | null>(null);
   const [state, setState] = useState({ price: productData.price, qty: 1 });
   const slides = productData.image.map((img, index) => (
-    <SwiperSlide key={index}>
+    <SwiperSlide key={index} >
       <Image
         src={img}
         width={350}
         height={466}
         alt="img"
-        className="object-cover h-full w-full object-top "
+        sizes="100vw"
+        className="object-fill h-full w-full object-top "
       ></Image>
     </SwiperSlide>
   ));
@@ -53,14 +53,14 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
         height={466}
         alt="img"
         priority
-        className="object-contain ms-auto block h-[80px] w-[80px] "
+        className="object-contain ms-auto block h-[80px] w-[80px] p-1 "
       ></Image>
     </SwiperSlide>
   ));
   return (
     <main>
-      <div className="container mx-auto flex px-10 flex-wrap flex-col md:flex-row mb-20 my-10">
-        <div className="w-full md:w-1/2 flex h-[500px] gap-3 px-5 relative x ">
+      <div className="container mx-auto flex px-10 flex-wrap flex-col lg:flex-row mb-20 my-10">
+        <div className="w-full lg:w-1/2 flex h-auto gap-3 px-5 relative x ">
           <SlideNextButton thumbsSwiper={thumbsSwiper}></SlideNextButton>
           <SlidePrevButton thumbsSwiper={thumbsSwiper}></SlidePrevButton>
           <Swiper
@@ -71,7 +71,7 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
             watchSlidesProgress={true}
             modules={[FreeMode, Thumbs]}
             direction="vertical"
-            className=" w-[70px] mySwiper"
+            className=" w-[70px] mySwiper h-[500px]"
           >
             {slidesThumb}
           </Swiper>
@@ -108,7 +108,7 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
             {slides}
           </Swiper>
         </div>
-        <div className=" w-full md:w-1/2 md:ps-5 lg:ps-0">
+        <div className=" w-full lg:w-1/2 lg:ps-5 xl:ps-0">
           <h2 className="text-2xl text-gray-900 font-semibold mt-10">
             {productData.title}
           </h2>
@@ -136,7 +136,7 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
             <h2 className="font-semibold mb-3">Size</h2>
             <Size></Size>
           </div>
-          <div>colors</div>
+          {/* <div>colors</div> */}
           <div className="mt-3">
             <h2 className="font-semibold">Qty</h2>
             <div className="flex items-center flex-start mt-1 ">
