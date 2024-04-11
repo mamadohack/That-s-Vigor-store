@@ -7,3 +7,14 @@ export type ProductListAPiType = {
   price: number;
   condition?: string;
 };
+
+export type CartItem = {
+  
+        id: number,
+        title: string,
+        image: string[],
+        rating: string,
+        price: number,
+        cartQuantity: number
+      
+}

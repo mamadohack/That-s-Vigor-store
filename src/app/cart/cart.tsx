@@ -3,11 +3,18 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
+import { CartItem } from "@/lib/types";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
-interface Props {}
+interface Props {
+  cartInfo: CartItem;
+}
 
-const Cart: NextPage<Props> = ({}) => {
-  const [state, setState] = useState({ price: 100, qty: 1 }); //{ price: productData.price, qty: 1 }
+const Cart: NextPage<Props> = ({ cartInfo }) => {
+  const [state, setState] = useState({
+    price: cartInfo.price * cartInfo.cartQuantity,
+    qty: cartInfo.cartQuantity,
+  }); //{ price: productData.price, qty: 1 }
   const inputQTY = useRef<HTMLInputElement | null>(null);
 
   return (
@@ -15,7 +22,7 @@ const Cart: NextPage<Props> = ({}) => {
       <div className="">
         <Image
           alt=""
-          src={"/img/product/1.jpg"}
+          src={cartInfo.image[cartInfo.id - 1]}
           width={120}
           height={200}
           sizes="(max-width: 768px) 100vw,
@@ -25,7 +32,12 @@ const Cart: NextPage<Props> = ({}) => {
         ></Image>
       </div>
       <div className="flex-grow">
-        <h2 className="font-bold py-2">$36.99</h2>
+        <h2 className="font-bold py-2">
+          $ {state.price}
+          <span className="float-right text-xl">
+            <MdOutlineDeleteOutline></MdOutlineDeleteOutline>
+          </span>
+        </h2>
         <h2 className="text-gray-500 text-xs">
           Maxi Dress Purple V-Neck Sleeveless Lace Up Casual Floor Length Dress
         </h2>
@@ -47,7 +59,7 @@ const Cart: NextPage<Props> = ({}) => {
                   setState((p) => {
                     return {
                       qty: p.qty - 1,
-                      price: p.price - 100,
+                      price: p.price - cartInfo.price,
                     };
                   });
                 }
@@ -76,7 +88,7 @@ const Cart: NextPage<Props> = ({}) => {
                 setState((p) => {
                   return {
                     qty: p.qty + 1,
-                    price: p.price + 100,
+                    price: p.price + cartInfo.price,
                   };
                 });
                 // inputQTY.current!.value = (

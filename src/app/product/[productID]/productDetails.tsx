@@ -18,8 +18,6 @@ import "swiper/css/navigation";
 import "@/app/globals.css";
 import SlideNextButton from "@/lib/SlideNextButton";
 import SlidePrevButton from "@/lib/SlidePrevButton";
-import ImageSlide from "@/lib/ImageSlide";
-
 import { sendUserCartinfo } from "@/Reduxtoolkitfeature/CartSlice";
 import { useRef, useState } from "react";
 interface Props {

@@ -1,17 +1,24 @@
 "use client";
 import { NextPage } from "next";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
 import Cart from "./cart";
+import {CartItem} from "@/lib/types";
 interface Props {}
-
 const Page: NextPage<Props> = ({}) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const cart = useSelector((state: RootState) => state.cart);
+
   return (
     <div className="md:px-20 px-10 mb-20">
       <div className="flex flex-wrap gap-5 md:flex-row flex-col">
         <div className="flex-grow">
           <h2 className="font-semibold text-xl">Shopping Cart</h2>
           <div className="space-y-3">
-            <Cart></Cart>
+            {cart.cartItems.map((item: CartItem, index) => {
+              return <Cart key={index} cartInfo={item}></Cart>;
+            })}
           </div>
         </div>
         <div className="w-[300px] mx-auto">
@@ -66,7 +73,7 @@ const Page: NextPage<Props> = ({}) => {
             ></Image>
           </div>
           <h2 className="py-2 font-semibold text-sm">Easy Returns</h2>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-gray-500 leading-5">
             We gladly accept returns within 14 days of receipt for most items in
             new condition if you are not 100% satisfied with the items you
             received.
