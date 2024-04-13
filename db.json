@@ -137,43 +137,8 @@
     "user": "one day best developer"
   },
   "cart": {
-    "cartItems": [
-      {
-        "id": 2,
-        "title": "Flowy striped skirt",
-        "image": [
-          "/img/product/product-1.jpg",
-          "/img/product/product-2.jpg",
-          "/img/product/product-3.jpg",
-          "/img/product/product-4.jpg",
-          "/img/product/product-5.jpg",
-          "/img/product/product-6.jpg",
-          "/img/product/product-7.jpg",
-          "/img/product/product-8.jpg"
-        ],
-        "rating": "***",
-        "price": 49,
-        "cartQuantity": 4
-      },
-      {
-        "id": 4,
-        "title": "Slim striped pocket shirt",
-        "image": [
-          "/img/product/product-1.jpg",
-          "/img/product/product-2.jpg",
-          "/img/product/product-3.jpg",
-          "/img/product/product-4.jpg",
-          "/img/product/product-5.jpg",
-          "/img/product/product-6.jpg",
-          "/img/product/product-7.jpg",
-          "/img/product/product-8.jpg"
-        ],
-        "rating": "****",
-        "price": 59,
-        "cartQuantity": 1
-      }
-    ],
-    "totalQuantity": 5,
-    "totalPrice": 255
+    "cartItems": [],
+    "totalQuantity": 0,
+    "totalPrice": 0
   }
 }

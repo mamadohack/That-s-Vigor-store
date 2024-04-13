@@ -31,14 +31,17 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
   const inputQTY = useRef<HTMLInputElement | null>(null);
   const [state, setState] = useState({ price: productData.price, qty: 1 });
   const slides = productData.image.map((img, index) => (
-    <SwiperSlide key={index} >
+    <SwiperSlide key={index}>
       <Image
         src={img}
-        width={350}
-        height={466}
+        // width={350}
+        // height={466}
+        fill
         alt="img"
-        sizes="100vw"
-        className="object-fill h-full w-full object-top "
+        sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+        className="object-cover h-full w-full object-top "
       ></Image>
     </SwiperSlide>
   ));
@@ -57,8 +60,8 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
   ));
   return (
     <main>
-      <div className="container mx-auto flex px-10 flex-wrap flex-col lg:flex-row mb-20 my-10">
-        <div className="w-full lg:w-1/2 flex h-auto gap-3 px-5 relative x ">
+      <div className="container mx-auto flex sm:px-10 flex-wrap flex-col lg:flex-row mb-20 my-10">
+        <div className="w-full lg:w-1/2 flex h-auto gap-3 sm:px-5 relative x ">
           <SlideNextButton thumbsSwiper={thumbsSwiper}></SlideNextButton>
           <SlidePrevButton thumbsSwiper={thumbsSwiper}></SlidePrevButton>
           <Swiper
@@ -101,7 +104,7 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
             navigation={true}
             thumbs={{ swiper: thumbsSwiper }}
             modules={[FreeMode, Navigation, Thumbs]}
-            className=" w-[calc(100%-70px)] h-auto "
+            className=" w-[calc(100%-70px)] h-auto relative overflow-hidden "
           >
             {slides}
           </Swiper>

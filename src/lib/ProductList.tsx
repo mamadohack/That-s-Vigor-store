@@ -7,9 +7,9 @@ import { BsArrowsAngleExpand } from "react-icons/bs";
 import { LiaHeart } from "react-icons/lia";
 import { LiaShoppingBagSolid } from "react-icons/lia";
 import { IoIosStar } from "react-icons/io";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
-import {sendUserCartinfo} from "@/Reduxtoolkitfeature/CartSlice";
+import { sendUserCartinfo } from "@/Reduxtoolkitfeature/CartSlice";
 
 interface Props {
   productsData: ProductListAPiType[];
@@ -40,6 +40,11 @@ const conditonCaseHandler = (condition: string) => {
 };
 const ProductList: NextPage<Props> = ({ productsData }) => {
   const dispatch = useDispatch<AppDispatch>();
+  const cart = useSelector((state: RootState) => state.cart);
+  const productCartListid: number[] = [];
+  cart.cartItems.forEach((e) => {
+    productCartListid.push(e.id);
+  });
   return (
     <section>
       <div className="mx-auto px-5 md:px-14">
@@ -79,7 +84,7 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
                   src={product.image[product.image.length - product.id]}
                   fill
                   alt={product.title}
-                  className="object-cover bg-top"
+                  className="object-cover object-top"
                   sizes="(min-width: 1540px) 320px, (min-width: 1280px) 256px, (min-width: 1040px) 192px, (min-width: 780px) 181px, (min-width: 640px) 224px, calc(100vw - 160px)"
                 ></Image>
                 {product?.condition && conditonCaseHandler(product.condition)}
@@ -98,7 +103,11 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
                     onClick={() => {
                       dispatch(sendUserCartinfo({ product: product, qty: 1 }));
                     }}
-                    className="p-3 rounded-full bg-white text-xl translate-y-full group-hover:translate-y-0 duration-300 ease-in-out opacity-0 group-hover:opacity-100 delay-200 hover:bg-red-600 hover:text-white hover:rotate-[360deg]"
+                    className={`p-3 rounded-full text-xl translate-y-full group-hover:translate-y-0 duration-300 ease-in-out opacity-0 group-hover:opacity-100 delay-200 ${
+                      productCartListid.includes(product.id)
+                        ? "bg-red-600 text-white"
+                        : "hover:bg-red-600 bg-white hover:text-white hover:rotate-[360deg]"
+                    }`}
                   >
                     <LiaShoppingBagSolid />
                   </button>

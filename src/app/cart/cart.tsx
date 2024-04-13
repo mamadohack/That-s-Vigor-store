@@ -1,21 +1,38 @@
 import { NextPage } from "next";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import { CartItem } from "@/lib/types";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+import { sendData } from "@/store";
+import {
+  updateQty,
+  getTotals,
+  deleteItem,
+} from "@/Reduxtoolkitfeature/CartSlice";
+import { Item } from "@radix-ui/react-select";
 
 interface Props {
   cartInfo: CartItem;
+  dispatch: any;
 }
 
-const Cart: NextPage<Props> = ({ cartInfo }) => {
+const Cart: NextPage<Props> = ({ cartInfo, dispatch }) => {
   const [state, setState] = useState({
     price: cartInfo.price * cartInfo.cartQuantity,
     qty: cartInfo.cartQuantity,
   }); //{ price: productData.price, qty: 1 }
+  // useEffect(() => {
+  //   dispatch(updateQty({ qty: state.qty, id: cartInfo.id }));
+  //   dispatch(getTotals());
+  // }, [state.qty]);
   const inputQTY = useRef<HTMLInputElement | null>(null);
+  const d = useMemo(() => {
+    dispatch(updateQty({ qty: state.qty, id: cartInfo.id }));
+    dispatch(getTotals());
+    sendData();
+  }, [state.qty]);
 
   return (
     <div className="flex my-5 gap-3">
@@ -24,7 +41,7 @@ const Cart: NextPage<Props> = ({ cartInfo }) => {
           alt=""
           src={cartInfo.image[cartInfo.id - 1]}
           width={120}
-          height={200}
+          height={160}
           sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
@@ -34,8 +51,14 @@ const Cart: NextPage<Props> = ({ cartInfo }) => {
       <div className="flex-grow">
         <h2 className="font-bold py-2">
           $ {state.price}
-          <span className="float-right text-xl">
-            <MdOutlineDeleteOutline></MdOutlineDeleteOutline>
+          <span className="float-right text-xl inline-block p-1 cursor-pointer">
+            <MdOutlineDeleteOutline
+              onClick={() => {
+                dispatch(deleteItem(cartInfo.id));
+                dispatch(getTotals());
+                sendData();
+              }}
+            ></MdOutlineDeleteOutline>
           </span>
         </h2>
         <h2 className="text-gray-500 text-xs">
@@ -47,7 +70,7 @@ const Cart: NextPage<Props> = ({ cartInfo }) => {
           </span>
           <span className="text-gray-500 py-2 inline-block text-xs">
             Size:
-            <span className="text-black">L</span>
+            <span className="text-black"> L</span>
           </span>
         </p>
         <div>
@@ -91,6 +114,7 @@ const Cart: NextPage<Props> = ({ cartInfo }) => {
                     price: p.price + cartInfo.price,
                   };
                 });
+
                 // inputQTY.current!.value = (
                 //   +inputQTY.current!.value + 1
                 // ).toString();

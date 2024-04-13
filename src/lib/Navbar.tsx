@@ -72,7 +72,7 @@ const Navbar: NextPage<Props> = ({}) => {
                 <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white ">
                   <li>
                     <a
-                      href="#"
+                      href="/#"
                       className="block py-2 px-3 text-gray-900 rounded-none md:bg-transparent md:p-0 border-b-2 border-[#ca1515] text-sm"
                       aria-current="page"
                     >
@@ -121,7 +121,7 @@ const Navbar: NextPage<Props> = ({}) => {
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href="/contact"
                       className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
                     >
                       CONTACT
@@ -146,17 +146,21 @@ const Navbar: NextPage<Props> = ({}) => {
                     <LiaHeart className="text-2xl" />
                   </li>
                   <li className="inline-block relative">
-                    <LiaShoppingBagSolid
-                      className="text-2xl cursor-pointer"
-                      onClick={()=>{setShowCart(p=>!p);}}
-                    />
-                    <div
-                      className={`text-xs flex justify-center items-center ${
-                        cart?.totalQuantity > 0 ? "opacity-100" : "opacity-0"
-                      } duration-500 ease-in-out absolute -top-3/4 -right-1/4 w-5 h-5 text-center rounded-full bg-rose-400 text-white`}
-                    >
-                      <span>{cart?.totalQuantity}</span>
-                    </div>
+                    <Link href="/cart">
+                      <LiaShoppingBagSolid
+                        className="text-2xl cursor-pointer"
+                        // onClick={() => {
+                        //   setShowCart((p) => !p);
+                        // }}
+                      />
+                      <div
+                        className={`text-xs flex justify-center items-center ${
+                          cart?.totalQuantity > 0 ? "opacity-100" : "opacity-0"
+                        } duration-500 ease-in-out absolute -top-3/4 -right-1/4 w-5 h-5 text-center rounded-full bg-rose-400 text-white`}
+                      >
+                        <span>{cart?.totalQuantity}</span>
+                      </div>
+                    </Link>
                   </li>
                 </ul>
               </div>

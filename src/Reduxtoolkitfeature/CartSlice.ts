@@ -13,10 +13,9 @@ const initialState: {
 export const sendUserCartinfo = createAsyncThunk(
   "cart/sendUserCartinfo",
   async (item: any, api: any) => {
+    api.dispatch(addToCart(item));
+    api.dispatch(getTotals());
     try {
-      api.dispatch(addToCart(item));
-      api.dispatch(getTotals());
-
       let d = api.getState();
       const res = await fetch(`http://localhost:9000/cart`, {
         method: "POST",
@@ -66,7 +65,8 @@ export const CartSlice = createSlice({
       if (existingIndex >= 0) {
         state.cartItems[existingIndex] = {
           ...state.cartItems[existingIndex],
-          cartQuantity: state.cartItems[existingIndex].cartQuantity + action.payload.qty,
+          cartQuantity:
+            state.cartItems[existingIndex].cartQuantity + action.payload.qty,
         };
         // toast.info("Increased product quantity", {
         //   position: "bottom-left",
@@ -99,6 +99,16 @@ export const CartSlice = createSlice({
       state.totalQuantity = quantity;
       state.totalPrice = total;
     },
+    updateQty(state, action) {
+      const existingIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      state.cartItems[existingIndex].cartQuantity = action.payload.qty;
+    },
+    deleteItem(state, action) {
+      let ar = state.cartItems.filter((i) => i.id !== action.payload);
+      state.cartItems = ar;
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchDataCart.fulfilled, (state, action) => {
@@ -106,5 +116,6 @@ export const CartSlice = createSlice({
     });
   },
 });
-export const { addToCart, getTotals } = CartSlice.actions;
+export const { addToCart, getTotals, updateQty, deleteItem } =
+  CartSlice.actions;
 export default CartSlice.reducer;

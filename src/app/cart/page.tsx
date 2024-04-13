@@ -17,7 +17,9 @@ const Page: NextPage<Props> = ({}) => {
           <h2 className="font-semibold text-xl">Shopping Cart</h2>
           <div className="space-y-3">
             {cart.cartItems.map((item: CartItem, index) => {
-              return <Cart key={index} cartInfo={item}></Cart>;
+              return (
+                <Cart key={index} cartInfo={item} dispatch={dispatch}></Cart>
+              );
             })}
           </div>
         </div>
@@ -25,11 +27,11 @@ const Page: NextPage<Props> = ({}) => {
           <h2 className="font-semibold text-xl py-2">Order Summary</h2>
           <div className="py-2 border-b">
             <span className="">Subtotal</span>
-            <span className="float-right text-sm">$148.95</span>
+            <span className="float-right text-sm">${cart.totalPrice}</span>
           </div>
           <div className="py-2 text-xl font-semibold">
             <span className="text-base">Total</span>
-            <span className="float-right">$148.95</span>
+            <span className="float-right">${cart.totalPrice}</span>
           </div>
           <button className="block text-center w-full py-3 bg-rose-600 text-white font-semibold">
             CHECKOUT
