@@ -3,7 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/lib/Navbar";
 import ProviderRedux from "@/lib/ProviderRedux";
-
+import { Suspense } from "react";
+import Loading from "./loading";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ export default function RootLayout({
       <ProviderRedux>
         <body className={inter.className}>
           <Navbar></Navbar>
-          {children}
+          <Suspense fallback={<Loading />}>{children}</Suspense>
         </body>
       </ProviderRedux>
     </html>

@@ -10,7 +10,7 @@ const Homepage: NextPage<Props> = ({}) => {
         <div
           className="sm:col-span-2 row-span-4 h-[638px] sm:bg-top bg-right-top space-y-3 flex justify-center flex-col px-5 sm:px-20 "
           style={{
-            backgroundImage: 'url("img/categories/category-1.jpg")',
+            backgroundImage: 'url("img/categories/s.jpg")',
             backgroundSize: "cover",
           }}
         >

@@ -8,6 +8,7 @@ import { RootState, AppDispatch } from "@/store";
 import { useEffect, useRef, useState } from "react";
 import { fetchDataCart, getTotals } from "@/Reduxtoolkitfeature/CartSlice";
 import Link from "next/link";
+import Minicart from "./minicart";
 
 interface Props {}
 
@@ -25,10 +26,6 @@ const Navbar: NextPage<Props> = ({}) => {
   }, [dispatch]);
   return (
     <>
-      {showCart && (
-        <div className="bg-black opacity-70 fixed inset-0 z-10"></div>
-      )}
-
       <div className="w-full z-20 relative bg-white">
         <div className="container mx-auto px-2 sm:p-0">
           <nav className=" border-gray-200  ">
@@ -66,7 +63,7 @@ const Navbar: NextPage<Props> = ({}) => {
                 </svg>
               </button>
               <div
-                className="hidden w-full lg:block lg:w-auto py-[31px]"
+                className="hidden w-full lg:block lg:w-auto"
                 id="navbar-default"
               >
                 <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white ">
@@ -113,7 +110,7 @@ const Navbar: NextPage<Props> = ({}) => {
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href="/blog"
                       className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
                     >
                       BLOG
@@ -129,7 +126,7 @@ const Navbar: NextPage<Props> = ({}) => {
                   </li>
                 </ul>
               </div>
-              <div className="header-right space-x-5 lg:flex items-center hidden py-[28px]">
+              <div className="header-right space-x-5 lg:flex items-center hidden">
                 <div className="inline-block align-middle">
                   <a
                     href="#"
@@ -138,56 +135,80 @@ const Navbar: NextPage<Props> = ({}) => {
                     Login / Register
                   </a>
                 </div>
-                <ul className="inline-block space-x-5">
-                  <li className="inline-block">
-                    <LiaSearchSolid className="text-2xl" />
+                <ul className="space-x-1 pt-1 flex ">
+                  <li className="ps-4">
+                    <LiaSearchSolid className="text-2xl h-[115px] " />
                   </li>
-                  <li className="inline-block">
-                    <LiaHeart className="text-2xl" />
+                  <li className="ps-4">
+                    <LiaHeart className="text-2xl h-[115px]" />
                   </li>
-                  <li className="inline-block relative">
-                    <Link href="/cart">
+                  <li
+                    className="ps-4 relative group"
+                    onMouseEnter={() => {
+                      setShowCart(true);
+                    }}
+                    onMouseLeave={() => {
+                      setShowCart(false);
+                    }}
+                  >
+                    <Link href="/cart" className="flex items-center">
                       <LiaShoppingBagSolid
-                        className="text-2xl cursor-pointer"
+                        className="text-2xl cursor-pointer h-[115px]"
                         // onClick={() => {
                         //   setShowCart((p) => !p);
                         // }}
                       />
-                      <div
+                      <span
+                        className={`text-sm text-rose-600 ms-1 duration-200 ${cart.totalQuantity > 0 ? "opacity-100" : "opacity-0"}`}
+                      >
+                        {cart?.totalQuantity}
+                      </span>
+                      {/* <div
                         className={`text-xs flex justify-center items-center ${
                           cart?.totalQuantity > 0 ? "opacity-100" : "opacity-0"
                         } duration-500 ease-in-out absolute -top-3/4 -right-1/4 w-5 h-5 text-center rounded-full bg-rose-400 text-white`}
                       >
                         <span>{cart?.totalQuantity}</span>
-                      </div>
+                      </div> */}
                     </Link>
+                    <div className="bg-white absolute top-auto right-[3%] p-3 space-y-3 hidden group-hover:block w-[350px]">
+                      <h2 className="text-lg font-semibold">Shopping Cart </h2>
+                      <div className="max-h-[400px] overflow-x-hidden overflow-y-auto">
+                        {cart.cartItems.map((item, index) => (
+                          <Minicart
+                            key={index}
+                            cartInfo={item}
+                            dispatch={dispatch}
+                          />
+                        ))}
+                      </div>
+                      <div className="flex justify-between items-center font-semibold">
+                        <span className="">Total</span>
+                        <span>${cart.totalPrice}</span>
+                      </div>
+                      <Link
+                        href="/cart"
+                        className="block text-white text-center w-full bg-rose-600 font-semibold p-2 "
+                      >
+                        View Cart
+                      </Link>
+                      <Link
+                        href="#"
+                        className="text-center block text-rose-600 border border-rose-600 w-full font-semibold p-2"
+                      >
+                        Checkout
+                      </Link>
+                    </div>
                   </li>
                 </ul>
               </div>
             </div>
           </nav>
         </div>
-        <div className="bg-white absolute top-full right-[3%] p-3 space-y-3 hidden">
-          <h2 className="text-lg font-semibold">Shopping Cart </h2>
-          <div className="items"></div>
-          <div className="flex justify-between items-center">
-            <span className="">Total</span>
-            <span>20$</span>
-          </div>
-          <Link
-            href="#"
-            className="block text-white text-center w-full bg-rose-400 font-semibold p-2 "
-          >
-            View Cart
-          </Link>
-          <Link
-            href="#"
-            className="text-center block text-rose-400 border border-rose-400 w-full font-semibold p-2"
-          >
-            Checkout
-          </Link>
-        </div>
       </div>
+      {showCart && (
+        <div className="bg-black opacity-70 fixed inset-0 z-10"></div>
+      )}
     </>
   );
 };

@@ -81,7 +81,7 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
             <div key={product.id} className="space-y-2 group">
               <div className="relative h-[360px]">
                 <Image
-                  src={product.image[product.image.length - product.id]}
+                  src={product.image[product.id -1]}
                   fill
                   alt={product.title}
                   className="object-cover object-top"
