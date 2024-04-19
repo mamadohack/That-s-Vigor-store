@@ -9,7 +9,10 @@ import { LiaShoppingBagSolid } from "react-icons/lia";
 import { IoIosStar } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
-import { sendUserCartinfo } from "@/Reduxtoolkitfeature/CartSlice";
+import {
+  sendUserCartinfo,
+  addFavoriteitem,
+} from "@/Reduxtoolkitfeature/CartSlice";
 
 interface Props {
   productsData: ProductListAPiType[];
@@ -44,6 +47,10 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
   const productCartListid: number[] = [];
   cart.cartItems.forEach((e) => {
     productCartListid.push(e.id);
+  });
+  const productFavoriteListid: number[] = [];
+  cart.FavoriteItems.forEach((e) => {
+    productFavoriteListid.push(e.id);
   });
   return (
     <section>
@@ -81,11 +88,11 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
             <div key={product.id} className="space-y-2 group">
               <div className="relative h-[360px]">
                 <Image
-                  src={product.image[product.id -1]}
+                  src={product.image[product.id - 1]}
                   fill
                   alt={product.title}
                   className="object-cover object-top"
-                  sizes="(min-width: 1540px) 320px, (min-width: 1280px) 256px, (min-width: 1040px) 192px, (min-width: 780px) 181px, (min-width: 640px) 224px, calc(100vw - 160px)"
+                  sizes="(min-width: 1540px) 320px, (min-width: 1280px) 400px, (min-width: 1040px) 350px, (min-width: 780px) 181px, (min-width: 640px) 224px, calc(100vw - 160px)"
                 ></Image>
                 {product?.condition && conditonCaseHandler(product.condition)}
 
@@ -96,7 +103,16 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
                   >
                     <BsArrowsAngleExpand />
                   </Link>
-                  <button className="inline-block p-3 rounded-full bg-white text-xl translate-y-full group-hover:translate-y-0 duration-300 ease-in-out opacity-0 group-hover:opacity-100 delay-100 hover:bg-red-600 hover:text-white hover:rotate-[360deg]">
+                  <button
+                    className={`p-3 rounded-full text-xl translate-y-full group-hover:translate-y-0 duration-300 ease-in-out opacity-0 group-hover:opacity-100 delay-200 ${
+                      productFavoriteListid.includes(product.id)
+                        ? "bg-red-600 text-white"
+                        : "hover:bg-red-600 bg-white hover:text-white hover:rotate-[360deg]"
+                    }`}
+                    onClick={() => {
+                      dispatch(addFavoriteitem(product));
+                    }}
+                  >
                     <LiaHeart />
                   </button>
                   <button

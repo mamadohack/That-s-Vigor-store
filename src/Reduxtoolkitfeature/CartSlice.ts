@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState: {
+  FavoriteItems: any[];
   cartItems: any[];
   totalQuantity: number;
   totalPrice: number;
 } = {
+  FavoriteItems: [],
   cartItems: [],
   totalQuantity: 0,
   totalPrice: 0,
@@ -28,6 +30,48 @@ export const sendUserCartinfo = createAsyncThunk(
       return data;
     } catch (error) {
       console.log("error at adding product to cart (services) => " + error);
+    }
+  }
+);
+export const addFavoriteitem = createAsyncThunk(
+  "cart/sendFavoriteitem",
+  async (item: any, api: any) => {
+    api.dispatch(addToFavorite(item));
+    try {
+       const d = api.getState().cart.FavoriteItems;
+
+      const res = await fetch(`http://localhost:9000/cart`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ FavoriteItems: d }),
+      });
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log("error at adding product to favorite (services) => " + error);
+    }
+  }
+);
+export const clearFavoriteList = createAsyncThunk(
+  "cart/clearFavoriteList",
+  async (item: any, api: any) => {
+    api.dispatch(deletefromFavoriteList());
+    try {
+      const d = api.getState().cart.FavoriteItems;
+
+      const res = await fetch(`http://localhost:9000/cart`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ FavoriteItems: d }),
+      });
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log("error at clearing favorite list (services) => " + error);
     }
   }
 );
@@ -109,6 +153,20 @@ export const CartSlice = createSlice({
       let ar = state.cartItems.filter((i) => i.id !== action.payload);
       state.cartItems = ar;
     },
+    addToFavorite(state, action) {
+      const existingIndex = state.FavoriteItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (existingIndex >= 0) {
+        state.FavoriteItems = state.FavoriteItems.filter((i: any) => i.id !== action.payload.id)
+      }
+      else{
+        state.FavoriteItems.push(action.payload)
+      }
+    },
+    deletefromFavoriteList(state) {
+      state.FavoriteItems = [];
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchDataCart.fulfilled, (state, action) => {
@@ -116,6 +174,12 @@ export const CartSlice = createSlice({
     });
   },
 });
-export const { addToCart, getTotals, updateQty, deleteItem } =
-  CartSlice.actions;
+export const {
+  addToCart,
+  getTotals,
+  updateQty,
+  deleteItem,
+  addToFavorite,
+  deletefromFavoriteList,
+} = CartSlice.actions;
 export default CartSlice.reducer;

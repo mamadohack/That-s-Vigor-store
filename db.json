@@ -134,10 +134,10 @@
     }
   ],
   "comments": {
-    "user": "one day best developer"
+    "jilali": "darwi hali"
   },
   "cart": {
-    "cartItems": [
+    "FavoriteItems": [
       {
         "id": 2,
         "title": "Flowy striped skirt",
@@ -152,29 +152,116 @@
           "/img/product/product-8.jpg"
         ],
         "rating": "***",
-        "price": 49,
-        "cartQuantity": 2
+        "price": 49
       },
       {
-        "id": 1,
-        "title": "Buttons tweed blazer",
+        "id": 3,
+        "title": "Cotton T-Shirt",
         "image": [
-          "/img/product/1.jpg",
           "/img/product/product-1.jpg",
           "/img/product/product-2.jpg",
           "/img/product/product-3.jpg",
           "/img/product/product-4.jpg",
           "/img/product/product-5.jpg",
           "/img/product/product-6.jpg",
-          "/img/product/product-7.jpg"
+          "/img/product/product-7.jpg",
+          "/img/product/product-8.jpg"
+        ],
+        "rating": "**",
+        "price": 59,
+        "condition": "out"
+      },
+      {
+        "id": 4,
+        "title": "Slim striped pocket shirt",
+        "image": [
+          "/img/product/product-1.jpg",
+          "/img/product/product-2.jpg",
+          "/img/product/product-3.jpg",
+          "/img/product/product-4.jpg",
+          "/img/product/product-5.jpg",
+          "/img/product/product-6.jpg",
+          "/img/product/product-7.jpg",
+          "/img/product/product-8.jpg"
         ],
         "rating": "****",
-        "price": 59,
-        "condition": "new",
-        "cartQuantity": 1
+        "price": 59
       }
     ],
-    "totalQuantity": 3,
-    "totalPrice": 157
-  }
+    "cartItems": [],
+    "totalQuantity": 0,
+    "totalPrice": 0
+  },
+  "blog": [
+    {
+      "id": 1,
+      "title": "No Bad Blood! The Reason Why Tamr Judge Finally Made Up With...",
+      "image": "/img/blog/blog-1.jpg",
+      "author": "Ema Timahe",
+      "date": "2019-09-17"
+    },
+    {
+      "id": 2,
+      "title": "Amf Cannes Red Carpet Celebrities Kendall Jenner, Pamela...",
+      "image": "/img/blog/blog-2.jpg",
+      "author": "Ema Timahe",
+      "date": "2019-09-17"
+    },
+    {
+      "id": 3,
+      "title": "Gigi Hadid, Rita Ora, Serena & Other Hot Celebs Stun At 2019...",
+      "image": "/img/blog/blog-3.jpg",
+      "author": "Ema Timahe",
+      "date": "2019-09-17"
+    },
+    {
+      "id": 4,
+      "title": "Pot Party! See Farrah Abraham Flaunt Smoking Body At...",
+      "image": "/img/blog/blog-4.jpg",
+      "author": "Ema Timahe",
+      "date": "2019-09-17"
+    },
+    {
+      "id": 5,
+      "title": "Kim Kardashian Steps Out In Paris Wearing Shocking Sparkly...",
+      "image": "/img/blog/blog-5.jpg",
+      "author": "Ema Timahe",
+      "date": "2019-09-17"
+    },
+    {
+      "id": 6,
+      "title": "Stephanie Pratt Busts Out Of Teeny Black Bikini During Hawaii...",
+      "image": "/img/blog/blog-6.jpg",
+      "author": "Ema Timahe",
+      "date": "2019-09-17"
+    },
+    {
+      "id": 7,
+      "title": "CMT Awards 2019 Red Carpet Arrivals Carrie Underwood, Sheryl...",
+      "image": "/img/blog/blog-7.jpg",
+      "author": "Ema Timahe",
+      "date": "2019-09-17"
+    },
+    {
+      "id": 8,
+      "title": "No Bad Blood! The Reason Why Tamr Judge Finally Made Up With...",
+      "image": "/img/blog/blog-8.jpg",
+      "author": "Ema Timahe",
+      "date": "2019-09-17"
+    },
+    {
+      "id": 9,
+      "title": "Ireland Baldwin Shows Off Trendy Ilse Valfre Tattoo At Stagecoach...",
+      "image": "/img/blog/blog-9.jpg",
+      "author": "Ema Timahe",
+      "date": "2019-09-17"
+    },
+    {
+      "id": 10,
+      "title": "Billboard Music Awards: Best, Worst & Wackiest Dresses On The...",
+      "image": "/img/blog/blog-10.jpg",
+      "author": "Ema Timahe",
+      "date": "2019-09-17"
+    }
+  ]
 }

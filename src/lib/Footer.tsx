@@ -177,13 +177,13 @@ const Footer: NextPage<Props> = ({}) => {
           <h2 className="font-semibold mt-5 text-lg">NEWSLETTER</h2>
           <form className="mt-3 relative ">
             <input
-              className="h-[52px] border rounded-full w-full p-3 outline-none focus:border-red-700 duration-150 pe-[31%] text-sm"
+              className="h-[52px] border rounded-full w-full p-3 outline-none focus:border-red-700 duration-150 pe-[37%] text-sm"
               type="email"
               name="email"
               id="email"
               placeholder="Email"
             />
-            <button className="absolute top-0 right-0 rounded-full py-2 px-3 w-[30%] h-full bg-red-700 text-white duration-200 hover:opacity-80 font-semibold text-sm">
+            <button className="text-center absolute top-0 right-0 rounded-full py-2 px-3 w-[35%] h-full bg-red-700 text-white duration-200 hover:opacity-80 font-semibold text-sm">
               SUBSCRIBE
             </button>
           </form>

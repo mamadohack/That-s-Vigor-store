@@ -1,4 +1,3 @@
-
 import { NextPage } from "next";
 import Image from "next/image";
 import { useRef, useState, useMemo } from "react";
@@ -20,17 +19,7 @@ const Minicart: NextPage<Props> = ({ cartInfo, dispatch }) => {
   const [state, setState] = useState({
     price: cartInfo.price * cartInfo.cartQuantity,
     qty: cartInfo.cartQuantity,
-  }); //{ price: productData.price, qty: 1 }
-  // useEffect(() => {
-  //   dispatch(updateQty({ qty: state.qty, id: cartInfo.id }));
-  //   dispatch(getTotals());
-  // }, [state.qty]);
-//   const inputQTY = useRef<HTMLInputElement | null>(null);
-//   const d = useMemo(() => {
-//     dispatch(updateQty({ qty: state.qty, id: cartInfo.id }));
-//     dispatch(getTotals());
-//     sendData();
-//   }, [state.qty]);
+  });
   const indexImage = cartInfo.id - 1;
   console.log(indexImage);
 
@@ -139,4 +128,4 @@ const Minicart: NextPage<Props> = ({ cartInfo, dispatch }) => {
   );
 };
 
-export default Minicart
+export default Minicart;

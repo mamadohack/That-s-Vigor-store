@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Nova+Cut&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -89,6 +90,11 @@
   */
 }
 
+.cookie-regular {
+  font-family: "Nova Cut", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
 
    .x .swiper-button-prev,
 .x .swiper-button-next{

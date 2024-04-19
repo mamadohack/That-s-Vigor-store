@@ -4,7 +4,6 @@ import ProductList from "@/lib/ProductList";
 import { ProductListAPiType } from "@/lib/types";
 import Banner from "@/lib/Banner";
 import Discount from "@/lib/Discount";
-import Footer from "@/lib/Footer";
 
 export default async function Home() {
   const response = await fetch("http://localhost:9000/products",{cache:"no-store"});
@@ -17,7 +16,6 @@ export default async function Home() {
       <ProductList productsData={productsData} />
       <Banner />
       <Discount />
-      <Footer />
     </main>
   );
 }
