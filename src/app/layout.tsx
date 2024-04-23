@@ -5,6 +5,8 @@ import Navbar from "@/lib/Navbar";
 import ProviderRedux from "@/lib/ProviderRedux";
 import { Suspense } from "react";
 import Loading from "./loading";
+import { Toaster } from "@/components/ui/toaster";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -22,6 +24,7 @@ export default function RootLayout({
       <ProviderRedux>
         <body className={inter.className}>
           <Suspense fallback={<Loading />}>{children}</Suspense>
+          <Toaster />
         </body>
       </ProviderRedux>
     </html>

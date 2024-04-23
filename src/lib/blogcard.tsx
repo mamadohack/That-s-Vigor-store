@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Image from "next/image";
-import type { Blogitem } from "@/app/(user)/blog/page";
+import type { Blogitem } from "@/app/(user)/(mainStore)/blog/page";
 interface Props {
   blogitem: Blogitem;
 }

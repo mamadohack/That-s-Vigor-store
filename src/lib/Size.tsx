@@ -8,11 +8,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { memo } from "react";
- const Size =()=> {
+import { forwardRef, memo } from "react";
+
+ const Size =() => {
+  
     console.log("size rendered");
   return (
-    <Select>
+    <Select required>
       <SelectTrigger className="w-[250px]">
         <SelectValue placeholder="Select Size" />
       </SelectTrigger>

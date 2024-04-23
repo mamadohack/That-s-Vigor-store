@@ -3,9 +3,11 @@ import Image from "next/image";
 import {  useState } from "react";
 import { CartItem } from "@/lib/types";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+import Link from "next/link";
 import {
   addFavoriteitem
 } from "@/Reduxtoolkitfeature/CartSlice";
+import { useToast } from "@/components/ui/use-toast";
 
 interface Props {
   cartInfo: CartItem;
@@ -13,14 +15,14 @@ interface Props {
 }
 
 const Miniwishlistcard: NextPage<Props> = ({ cartInfo, dispatch }) => {
-  const indexImage = cartInfo.id - 1;
+  const { toast } = useToast();
 
   return (
     <div className="flex gap-3 mb-3">
-      <div className="">
+      <Link className="opacity-85" href={`http://localhost:3000/product/${cartInfo.id}`}>
         <Image
           alt=""
-          src={cartInfo.image[indexImage]}
+          src={cartInfo.image[0]}
           width={80}
           height={106}
           sizes="(max-width: 768px) 100vw,
@@ -28,14 +30,19 @@ const Miniwishlistcard: NextPage<Props> = ({ cartInfo, dispatch }) => {
               33vw"
           className="object-contain"
         ></Image>
-      </div>
+      </Link>
       <div className="flex-grow flex flex-col justify-center gap-1">
         <h2 className="font-bold ">
           $ {cartInfo.price}
           <span className="float-right text-base inline-block p-1 cursor-pointer">
             <MdOutlineDeleteOutline
               onClick={() => {
-                dispatch(addFavoriteitem(cartInfo));
+                dispatch(addFavoriteitem(cartInfo)).then(() => {
+                  toast({
+                    className: "bg-rose-600 text-white font-semibold",
+                    description: "Item deleted successfully.",
+                  });
+                });
               }}
             ></MdOutlineDeleteOutline>
           </span>

@@ -80,15 +80,6 @@
   }
 }
 
-:root {
-  --swiper-navigation-size: 20px;
-  --swiper-navigation-color: red;
-  /*
-  --swiper-navigation-top-offset: 50%;
-  --swiper-navigation-sides-offset: 10px;
-  --swiper-navigation-color: var(--swiper-theme-color);
-  */
-}
 
 .cookie-regular {
   font-family: "Nova Cut", system-ui;
@@ -98,14 +89,14 @@
 
    .x .swiper-button-prev,
 .x .swiper-button-next{
+  --swiper-navigation-size: 1.2rem;
   opacity: 0;
   transition: 200ms ease-in;
   background-color: white;
   padding: 20px;
-  border-radius: 50%;
+  border-radius: 100%;
   color: black;
-  font-weight: bold;
-  
+  font-weight: bold;  
 }
 .x .swiper:hover .swiper-button-prev,
 .x .swiper:hover .swiper-button-next{
@@ -153,3 +144,12 @@
       }
 
 
+.gradient-text {
+    background-color: rgb(225 29 72);
+    background-image: linear-gradient(45deg, rgb(225 29 72), #9585bd);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+}

@@ -1,6 +1,7 @@
 
 export type ProductListAPiType = {
   id: number;
+  category:string;
   title: string;
   image: string[];
   rating: string;
@@ -9,12 +10,11 @@ export type ProductListAPiType = {
 };
 
 export type CartItem = {
-  
-        id: number,
-        title: string,
-        image: string[],
-        rating: string,
-        price: number,
-        cartQuantity: number
-      
-}
+  id: number;
+  title: string;
+  category:string;
+  image: string[];
+  rating: string;
+  price: number;
+  cartQuantity: number;
+};

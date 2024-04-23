@@ -79,10 +79,13 @@ export const clearFavoriteList = createAsyncThunk(
 export const fetchDataCart = createAsyncThunk(
   "cart/fetchDataCart",
   async () => {
-    const res = await fetch("http://localhost:9000/cart", {
+    try{ const res = await fetch("http://localhost:9000/cart", {
       cache: "no-store",
     });
-    return await res.json();
+    return await res.json();}catch (error) {
+      console.log("error at fetching favorite list (services) => " + error);
+    }
+   
     // return JSON.parse('{user:"mohamed"}');
     // try {
     //     const res = await fetch("http://localhost:9000/cart", {

@@ -9,6 +9,8 @@ import {
   getTotals,
   deleteItem,
 } from "@/Reduxtoolkitfeature/CartSlice";
+import { useToast } from "@/components/ui/use-toast";
+
 
 interface Props {
   cartInfo: CartItem;
@@ -20,21 +22,20 @@ const Minicart: NextPage<Props> = ({ cartInfo, dispatch }) => {
     price: cartInfo.price * cartInfo.cartQuantity,
     qty: cartInfo.cartQuantity,
   });
-  const indexImage = cartInfo.id - 1;
-  console.log(indexImage);
+  const { toast } = useToast();
 
   return (
     <div className="flex gap-3 mb-3">
       <div className="">
         <Image
           alt=""
-          src={cartInfo.image[indexImage]}
+          src={cartInfo.image[0]}
           width={80}
           height={106}
           sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
-          className="object-contain"
+          className="object-cover"
         ></Image>
       </div>
       <div className="flex-grow flex flex-col justify-evenly">
@@ -45,12 +46,17 @@ const Minicart: NextPage<Props> = ({ cartInfo, dispatch }) => {
               onClick={() => {
                 dispatch(deleteItem(cartInfo.id));
                 dispatch(getTotals());
-                sendData();
+                sendData().then(() => {
+                  toast({
+                    className: "bg-rose-600 text-white font-semibold",
+                    description: "Item deleted successfully.",
+                  });
+                });
               }}
             ></MdOutlineDeleteOutline>
           </span>
         </h2>
-        <h2 className="text-gray-500 text-xs">{cartInfo.title}</h2>
+        <h2 className="text-gray-500 text-xs">{cartInfo.title.slice(0, 20)}</h2>
         <p className="space-x-3">
           <span className="text-gray-500 py-1 inline-block text-xs">
             Color: <span className="text-black">Burgundy</span>

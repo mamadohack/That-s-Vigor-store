@@ -10,7 +10,7 @@ export default function SlidePrevButton({
 
   return (
     <button
-      className="block bottom-[150px] left-10 absolute p-1 hover:opacity-70 duration-100  "
+      className="block -bottom-10 left-10 absolute p-1 hover:opacity-70 duration-100  "
       onClick={() => thumbsSwiper?.slideNext()}
     >
       <IoIosArrowUp className="font-bold rotate-180 text-2xl text-rose-600"></IoIosArrowUp>

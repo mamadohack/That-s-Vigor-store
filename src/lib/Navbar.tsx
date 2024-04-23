@@ -28,7 +28,7 @@ const Navbar: NextPage<Props> = ({}) => {
   const background = useRef<HTMLDivElement | null>(null);
   const cart = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch<AppDispatch>();
-  let favoriteItemsList = useEffect(() => {
+  useEffect(() => {
     const t = dispatch(fetchDataCart());
     t.then((r) => {
       return dispatch(getTotals());
@@ -38,7 +38,7 @@ const Navbar: NextPage<Props> = ({}) => {
     <>
       <div className="w-full z-20 relative bg-white">
         <nav className=" border-gray-200 ">
-          <div className=" px-2 flex flex-wrap items-center justify-between mx-auto">
+          <div className=" px-5 flex flex-wrap items-center justify-between mx-auto">
             <a
               href="/"
               className="flex items-center space-x-3 rtl:space-x-reverse py-5 "
@@ -53,7 +53,9 @@ const Navbar: NextPage<Props> = ({}) => {
               className="group flex justify-center items-center w-10 h-10 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
               // aria-controls="#navbar-default"
               // aria-expanded="false"
-              onClick={() => {setcollabseNavbar(p=>!p)}}
+              onClick={() => {
+                setcollabseNavbar((p) => !p);
+              }}
             >
               <LuAlignJustify className="text-2xl group-focus:rotate-90 duration-150 font-bold" />
               {/* <AiOutlineClose className="text-2xl group-focus:opacity-100 opacity-0 duration-200 absolute font-bold" /> */}
@@ -97,14 +99,16 @@ const Navbar: NextPage<Props> = ({}) => {
               </svg> */}
             </button>
             <div
-              className={`${collabseNavbar ? "block" : "hidden"} w-full lg:block lg:w-auto`}
+              className={`${
+                collabseNavbar ? "block" : "hidden"
+              } w-full lg:block lg:w-auto`}
               id="navbar-default"
             >
-              <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white ">
+              <ul className="font-medium flex flex-col px-7 py-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 lg:flex-row lg:space-x-4 rtl:space-x-reverse lg:mt-0 lg:border-0 lg:bg-white ">
                 <li>
                   <a
                     href="/#"
-                    className="block py-2 px-3 text-gray-900 rounded-none md:bg-transparent md:p-0 border-b-2 border-[#ca1515] text-sm"
+                    className="w-fit block py-2  text-gray-900 rounded-none lg:bg-transparent lg:p-0 border-b-2 border-[#ca1515] text-sm"
                     aria-current="page"
                   >
                     HOME
@@ -113,23 +117,23 @@ const Navbar: NextPage<Props> = ({}) => {
                 <li>
                   <a
                     href="#"
-                    className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
+                    className="w-fit block py-2  text-gray-900 hover:bg-gray-100 lg:hover:bg-transparent lg:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
                   >
                     WOMEN’S
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a
                     href="#"
-                    className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
+                    className="w-fit block py-2  text-gray-900 hover:bg-gray-100 lg:hover:bg-transparent lg:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
                   >
                     MEN’S
                   </a>
-                </li>
+                </li> */}
                 <li>
                   <a
                     href="#"
-                    className="block py-2 px-3 text-gray-900  hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
+                    className="w-fit block py-2  text-gray-900  hover:bg-gray-100 lg:hover:bg-transparent lg:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
                   >
                     SHOP
                   </a>
@@ -137,7 +141,7 @@ const Navbar: NextPage<Props> = ({}) => {
                 <li>
                   <a
                     href="#"
-                    className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
+                    className="w-fit block py-2  text-gray-900 hover:bg-gray-100 lg:hover:bg-transparent lg:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
                   >
                     PAGES
                   </a>
@@ -145,7 +149,7 @@ const Navbar: NextPage<Props> = ({}) => {
                 <li>
                   <a
                     href="/blog"
-                    className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
+                    className="w-fit block py-2  text-gray-900 hover:bg-gray-100 lg:hover:bg-transparent lg:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
                   >
                     BLOG
                   </a>
@@ -153,10 +157,52 @@ const Navbar: NextPage<Props> = ({}) => {
                 <li>
                   <a
                     href="/contact"
-                    className="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
+                    className="w-fit block py-2  text-gray-900 hover:bg-gray-100 lg:hover:bg-transparent lg:p-0 border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent text-sm"
                   >
                     CONTACT
                   </a>
+                </li>
+                <li className="lg:hidden block">
+                  <a
+                    href="#"
+                    className=" block py-2 text-gray-900 rounded text-sm"
+                  >
+                    Login / Register
+                  </a>
+                  <ul className="flex items-center justify-center gap-5">
+                    <li>
+                      <Link href="">
+                        <LiaSearchSolid className="text-2xl inline-block " />
+                        <span className="text-sm text-rose-600 me-1  duration-200"></span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/wishlist">
+                        <LiaHeart className="text-2xl inline-block" />
+                        <span
+                          className={`text-sm text-rose-600 ms-1 duration-200 ${
+                            cart.FavoriteItems.length > 0
+                              ? "opacity-100"
+                              : "opacity-0"
+                          }`}
+                        >
+                          {cart?.FavoriteItems.length}
+                        </span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/cart">
+                        <LiaShoppingBagSolid className="text-2xl inline-block" />
+                        <span
+                          className={`text-sm text-rose-600 ms-1 duration-200 ${
+                            cart.totalQuantity > 0 ? "opacity-100" : "opacity-0"
+                          }`}
+                        >
+                          {cart?.totalQuantity}
+                        </span>
+                      </Link>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </div>
@@ -171,7 +217,7 @@ const Navbar: NextPage<Props> = ({}) => {
               </div>
               <ul className="space-x-1 pt-1 flex ">
                 <li className="ps-4">
-                  <LiaSearchSolid className="text-2xl h-[115px] " />
+                  <LiaSearchSolid className="text-2xl h-[115px]  " />
                 </li>
                 <li
                   className="ps-5  group relative"
@@ -210,18 +256,18 @@ const Navbar: NextPage<Props> = ({}) => {
                       <span className="">{cart?.FavoriteItems.length} </span>
                       <span className="ms-1">item(s) in your Lists</span>
                     </div>
-                    <Link
+                    {/* <Link
                       href="/cart"
                       className="block text-white text-center w-full bg-rose-600 font-semibold p-2 "
                     >
                       View Cart
-                    </Link>
+                    </Link> */}
                     <Link
                       onClick={() => {
                         dispatch(clearFavoriteList(""));
                       }}
                       href="#"
-                      className="text-center block text-rose-600 border border-rose-600 w-full font-semibold p-2"
+                      className="block text-white text-center w-full bg-rose-600 font-semibold p-2 "
                     >
                       Clear Wishlist
                     </Link>
@@ -261,7 +307,9 @@ const Navbar: NextPage<Props> = ({}) => {
                   <div className="bg-white absolute top-auto right-[3%] p-3 space-y-3 hidden group-hover:block w-[350px]">
                     <h2 className="text-lg font-semibold">Shopping Cart </h2>
                     <div className="max-h-[400px] overflow-x-hidden overflow-y-auto">
-                      {cart?.cartItems.length === 0 && <h2>Empty List</h2>}
+                      {cart?.cartItems.length === 0 && (
+                        <h2>Oops, your cart is empty!</h2>
+                      )}
                       {cart.cartItems.map((item, index) => (
                         <Minicart
                           key={index}
@@ -276,13 +324,13 @@ const Navbar: NextPage<Props> = ({}) => {
                     </div>
                     <Link
                       href="/cart"
-                      className="block text-white text-center w-full bg-rose-600 font-semibold p-2 "
+                      className="block text-white text-center w-full bg-rose-600 font-semibold p-2 hover:opacity-85 duration-200"
                     >
                       View Cart
                     </Link>
                     <Link
                       href="#"
-                      className="text-center block text-rose-600 border border-rose-600 w-full font-semibold p-2"
+                      className="text-center block text-rose-600 border border-rose-600 w-full font-semibold p-2 hover:opacity-85 duration-200"
                     >
                       Checkout
                     </Link>
