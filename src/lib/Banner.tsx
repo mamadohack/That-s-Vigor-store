@@ -44,7 +44,7 @@ const Banner: NextPage<Props> = ({}) => {
               <span className="sm:text-2xl text-red-600">
                 {"The Chloe Collection".toUpperCase()}
               </span>
-              <h2 className="text-[40px] sm:text-[70px] cookie-regular">
+              <h2 className="text-[30px] sm:text-[50px] cookie-regular">
                 The Project Jacket
               </h2>
               <Link
@@ -60,7 +60,7 @@ const Banner: NextPage<Props> = ({}) => {
               <span className="sm:text-2xl text-red-600">
                 {"The Chloe Collection".toUpperCase()}
               </span>
-              <h2 className="text-[40px] sm:text-[70px] cookie-regular">
+              <h2 className="text-[30px] sm:text-[50px] cookie-regular">
                 The Project Jacket
               </h2>
               <Link
@@ -76,7 +76,7 @@ const Banner: NextPage<Props> = ({}) => {
               <span className="sm:text-2xl text-red-600">
                 {"The Chloe Collection".toUpperCase()}
               </span>
-              <h2 className="text-[40px] sm:text-[70px] cookie-regular">
+              <h2 className="text-[30px] sm:text-[50px] cookie-regular">
                 The Project Jacket
               </h2>
               <Link

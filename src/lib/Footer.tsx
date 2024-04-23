@@ -11,15 +11,19 @@ interface Props {}
 const Footer: NextPage<Props> = ({}) => {
   return (
     <section id="footer">
-      <div className="grid lg:grid-cols-6 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mb-10">
+      {/* <div className="grid lg:grid-cols-6 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mb-10 px-10 sm:px-0">
         <div className="relative h-[320px] col-span-1">
           <Image
             alt="prod1"
             src="/img/instagram/insta-1.jpg"
-            fill
-            className="sm:object-cover -z-10"
+            height={320}
+            width={320}
+            sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+            className="object-cover -z-10 w-full h-full"
           ></Image>
-          <div className="h-full w-full opacity-0 hover:opacity-80 bg-white duration-200 flex justify-center items-center flex-col gap-2 ">
+          <div className="absolute top-0 left-0 h-full w-full opacity-0 hover:opacity-80 bg-white duration-200 flex justify-center items-center flex-col gap-2 ">
             <FaInstagram className="text-3xl " />
             <Link href="#" className="">
               @ That&apos;s Vigor
@@ -30,10 +34,14 @@ const Footer: NextPage<Props> = ({}) => {
           <Image
             alt="prod2"
             src="/img/instagram/insta-2.jpg"
-            fill
-            className="sm:object-cover -z-10"
+            height={320}
+            width={320}
+            sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+            className="object-cover -z-10 w-full h-full"
           ></Image>
-          <div className="h-full w-full opacity-0 hover:opacity-80 bg-white duration-200 flex justify-center items-center flex-col gap-2 ">
+          <div className="absolute top-0 left-0 h-full w-full opacity-0 hover:opacity-80 bg-white duration-200 flex justify-center items-center flex-col gap-2 ">
             <FaInstagram className="text-3xl " />
             <Link href="#" className="">
               @ That&apos;s Vigor
@@ -44,10 +52,14 @@ const Footer: NextPage<Props> = ({}) => {
           <Image
             alt="prod3"
             src="/img/instagram/insta-3.jpg"
-            fill
-            className="sm:object-cover -z-10"
+            height={320}
+            width={320}
+            sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+            className="object-cover -z-10 w-full h-full"
           ></Image>
-          <div className="h-full w-full opacity-0 hover:opacity-80 bg-white duration-200 flex justify-center items-center flex-col gap-2 ">
+          <div className="absolute top-0 left-0 h-full w-full opacity-0 hover:opacity-80 bg-white duration-200 flex justify-center items-center flex-col gap-2 ">
             <FaInstagram className="text-3xl " />
             <Link href="#" className="">
               @ That&apos;s Vigor
@@ -58,10 +70,14 @@ const Footer: NextPage<Props> = ({}) => {
           <Image
             alt="prod4"
             src="/img/instagram/insta-4.jpg"
-            fill
-            className="sm:object-cover -z-10"
+            height={320}
+            width={320}
+            sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+            className="object-cover -z-10 w-full h-full"
           ></Image>
-          <div className="h-full w-full opacity-0 hover:opacity-80 bg-white duration-200 flex justify-center items-center flex-col gap-2 ">
+          <div className="absolute top-0 left-0 h-full w-full opacity-0 hover:opacity-80 bg-white duration-200 flex justify-center items-center flex-col gap-2 ">
             <FaInstagram className="text-3xl " />
             <Link href="#" className="">
               @ That&apos;s Vigor
@@ -72,10 +88,14 @@ const Footer: NextPage<Props> = ({}) => {
           <Image
             alt="prod5"
             src="/img/instagram/insta-5.jpg"
-            fill
-            className="sm:object-cover -z-10"
+            height={320}
+            width={320}
+            sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+            className="object-cover -z-10 w-full h-full"
           ></Image>
-          <div className="h-full w-full opacity-0 hover:opacity-80 bg-white duration-200 flex justify-center items-center flex-col gap-2 ">
+          <div className="absolute top-0 left-0 h-full w-full opacity-0 hover:opacity-80 bg-white duration-200 flex justify-center items-center flex-col gap-2 ">
             <FaInstagram className="text-3xl " />
             <Link href="#" className="">
               @ That&apos;s Vigor
@@ -86,18 +106,22 @@ const Footer: NextPage<Props> = ({}) => {
           <Image
             alt="prod6"
             src="/img/instagram/insta-6.jpg"
-            fill
-            className="sm:object-cover -z-10"
+            height={320}
+            width={320}
+            sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+            className="object-cover -z-10 w-full h-full"
           ></Image>
-          <div className="h-full w-full opacity-0 hover:opacity-80 bg-white duration-200 flex justify-center items-center flex-col gap-2 ">
+          <div className="absolute top-0 left-0 h-full w-full opacity-0 hover:opacity-80 bg-white duration-200 flex justify-center items-center flex-col gap-2 ">
             <FaInstagram className="text-3xl " />
             <Link href="#" className="">
               @ That&apos;s Vigor
             </Link>
           </div>
         </div>
-      </div>
-      <div className="my-10 grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 sm:px-10 px-5 md:px-20 gap-10">
+      </div> */}
+      <div className="my-5 grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 sm:px-10 px-5 md:px-20 gap-10">
         <div className="col-span-2 ">
           <h2 className="cookie-regular text-[40px]">That&apos;s Vigor</h2>
           <p className="text-sm text-gray-600">
@@ -177,13 +201,13 @@ const Footer: NextPage<Props> = ({}) => {
           <h2 className="font-semibold mt-5 text-lg">NEWSLETTER</h2>
           <form className="mt-3 relative ">
             <input
-              className="h-[52px] border rounded-full w-full p-3 outline-none focus:border-red-700 duration-150 pe-[31%] text-sm"
+              className="h-[52px] border rounded-full w-full p-3 outline-none focus:border-red-700 duration-150 pe-[37%] text-sm"
               type="email"
               name="email"
               id="email"
               placeholder="Email"
             />
-            <button className="absolute top-0 right-0 rounded-full py-2 px-3 w-[30%] h-full bg-red-700 text-white duration-200 hover:opacity-80 font-semibold text-sm">
+            <button className="text-center absolute top-0 right-0 rounded-full py-2 px-3 w-[35%] h-full bg-red-700 text-white duration-200 hover:opacity-80 font-semibold text-sm">
               SUBSCRIBE
             </button>
           </form>
