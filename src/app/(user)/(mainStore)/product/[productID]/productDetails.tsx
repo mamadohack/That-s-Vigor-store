@@ -109,7 +109,6 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              console.log(e.currentTarget)
               dispatch(
                 sendUserCartinfo({ product: productData, qty: state.qty })
               ).then(() => {
@@ -201,9 +200,7 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
             <div className="flex items-center gap-5 mt-3 ps-3 ">
               <button
                 className="p-3 bg-gray-700 text-white font-semibold text-sm rounded-lg hover:opacity-85 duration-200"
-                onClick={() => {
-                  
-                }}
+                type="submit"
               >
                 Add to Cart
               </button>

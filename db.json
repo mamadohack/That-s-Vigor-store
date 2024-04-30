@@ -123,8 +123,8 @@
       "category": "bags",
       "title": "PU Leather Bags Plaid Zipper Ring Handle Hobo Shape Bag",
       "image": [
-        "/img/product/bags/product-3 (1).jpg",
         "/img/product/bags/product-3 (2).jpg",
+        "/img/product/bags/product-3 (1).jpg",
         "/img/product/bags/product-3 (3).jpg",
         "/img/product/bags/product-3 (4).jpg"
       ],
@@ -150,26 +150,9 @@
   },
   "cart": {
     "FavoriteItems": [],
-    "cartItems": [
-      {
-        "id": 2,
-        "category": "dress",
-        "title": "Flowy striped skirt",
-        "image": [
-          "/img/product/product-2-1.jpg",
-          "/img/product/product-2-2.jpg",
-          "/img/product/product-3-1.jpg",
-          "/img/product/product-3-2.jpg",
-          "/img/product/product-4-1.jpg",
-          "/img/product/product-4-2.jpg"
-        ],
-        "rating": "***",
-        "price": 49,
-        "cartQuantity": 2
-      }
-    ],
-    "totalQuantity": 2,
-    "totalPrice": 98
+    "cartItems": [],
+    "totalQuantity": 0,
+    "totalPrice": 0
   },
   "blog": [
     {

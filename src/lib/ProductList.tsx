@@ -53,9 +53,11 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
   cart.FavoriteItems.forEach((e) => {
     productFavoriteListid.push(e.id);
   });
-  const [productfiltered, setFilterProduct] = useState(
-    productsData.filter((i) => i.category === "dress")
-  );
+  const defaultallproduct = productsData
+    .filter((i) => i.category === "dress")
+    .slice(0, 4)
+    .concat(productsData.filter((i) => i.category === "bags"));;
+  const [productfiltered, setFilterProduct] = useState(defaultallproduct);
   return (
     <section>
       <div className="mx-auto px-10 md:px-14">
@@ -68,7 +70,13 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
           </h2>
           <ul className="space-x-5 text-xs md:text-sm flex flex-wrap items-center justify-center gap-2">
             <li className="inline-block border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent">
-              <button>All</button>
+              <button
+                onClick={() => {
+                  setFilterProduct(defaultallproduct);
+                }}
+              >
+                All
+              </button>
             </li>
             <li className="inline-block border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent">
               <button
@@ -112,8 +120,8 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
                   width={640}
                   height={853}
                   alt={product.title}
-                  // placeholder="blur"
-                  // blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAYAAAB/qH1jAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAJ0lEQVR4nGPY2fXjv458/H9Bbtf/IDbD/7v//8/Mvfq/J+nEfxAbAF3NFsFiuaE1AAAAAElFTkSuQmCC"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAYAAAB/qH1jAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAJ0lEQVR4nGPY2fXjv458/H9Bbtf/IDbD/7v//8/Mvfq/J+nEfxAbAF3NFsFiuaE1AAAAAElFTkSuQmCC"
                   priority
                   className="object-cover object-top w-full h-auto"
                   sizes="(min-width: 1540px) 320px, (min-width: 1280px) 400px, (min-width: 1040px) 350px, (min-width: 780px) 181px, (min-width: 640px) 224px, calc(100vw - 160px)"
