@@ -23,7 +23,7 @@ import { useRef, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 
 interface Props {
-  productData: ProductListAPiType;
+  productData: any;
 }
 
 const ProductDetails: NextPage<Props> = ({ productData }) => {
@@ -34,14 +34,14 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
   const inputQTY = useRef<HTMLInputElement | null>(null);
   const selectQTY = useRef<HTMLSelectElement | null>(null);
   const [state, setState] = useState({ price: productData.price, qty: 1 });
-  const slides = productData.image.map((img, index) => (
+  const slides = productData.image.data.map((img: any, index: number) => (
     <SwiperSlide key={index}>
       <Image
-        src={img}
+        src={`http://localhost:1337${img.attributes.url}`}
         // width={350}
         // height={466}
-        width={640}
-        height={853}
+        width={img.attributes.width}
+        height={img.attributes.height}
         alt="img"
         priority
         sizes="(max-width: 768px) 100vw,
@@ -51,13 +51,15 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
       ></Image>
     </SwiperSlide>
   ));
-  const slidesThumb = productData.image.map((img, index) => (
+  const slidesThumb = productData.image.data.map((img: any, index: number) => (
     <SwiperSlide key={index} className="max-h-[100px]">
       {/* <ImageSlide img={img}></ImageSlide> */}
       <Image
-        src={img}
-        width={350}
-        height={466}
+        src={`http://localhost:1337${img.attributes.url}`}
+        // width={350}
+        // height={466}
+        width={img.attributes.width}
+        height={img.attributes.height}
         alt="img"
         priority
         className="object-contain ms-auto block h-[80px] w-[80px] p-1 "
@@ -123,16 +125,16 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
               {productData.title}
             </h2>
             <div className="flex items-center gap-5 mt-1">
-              <span>
+              {/* <span>
                 {Array.from(productData.rating).map((r: string, index) => (
                   <IoIosStar
                     key={index}
                     className="text-yellow-500 inline-block"
                   />
                 ))}
-              </span>
+              </span> */}
               <span className="text-gray-600 text-sm">153 Order</span>
-              <span className="">{productData.condition?.toUpperCase()}</span>
+              {/* <span className="">{productData.condition?.toUpperCase()}</span> */}
             </div>
             <h2 className="font-semibold mt-3 text-lg">{state.price}$</h2>
             <p className="mt-3 text-pretty text-gray-700 ">
