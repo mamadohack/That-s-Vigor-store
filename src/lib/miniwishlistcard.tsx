@@ -10,7 +10,7 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 
 interface Props {
-  cartInfo: CartItem;
+  cartInfo: any;
   dispatch: any;
 }
 
@@ -19,10 +19,13 @@ const Miniwishlistcard: NextPage<Props> = ({ cartInfo, dispatch }) => {
 
   return (
     <div className="flex gap-3 mb-3">
-      <Link className="opacity-85" href={`http://localhost:3000/product/${cartInfo.id}`}>
+      <Link
+        className="opacity-85"
+        href={`http://localhost:3000/product/${cartInfo.id}`}
+      >
         <Image
           alt=""
-          src={cartInfo.image[0]}
+          src={`http://localhost:1337${cartInfo.attributes.image.data[0].attributes.url}`}
           width={80}
           height={106}
           sizes="(max-width: 768px) 100vw,
@@ -33,7 +36,7 @@ const Miniwishlistcard: NextPage<Props> = ({ cartInfo, dispatch }) => {
       </Link>
       <div className="flex-grow flex flex-col justify-center gap-1">
         <h2 className="font-bold ">
-          $ {cartInfo.price}
+          $ {cartInfo.attributes.price}
           <span className="float-right text-base inline-block p-1 cursor-pointer">
             <MdOutlineDeleteOutline
               onClick={() => {
@@ -47,7 +50,7 @@ const Miniwishlistcard: NextPage<Props> = ({ cartInfo, dispatch }) => {
             ></MdOutlineDeleteOutline>
           </span>
         </h2>
-        <h2 className="text-gray-500 text-sm">{cartInfo.title}</h2>
+        <h2 className="text-gray-500 text-sm">{cartInfo.attributes.title}</h2>
       </div>
     </div>
   );

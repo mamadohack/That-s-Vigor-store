@@ -33,9 +33,11 @@ const Page: NextPage<Props> = async ({ params: { productID } }) => {
     }
   `;
   const productData = await fetchingproduct(ProductQuery, { id: productID });
+  const id = productData?.product?.data?.id;
+  console.log(productID);
     return (
       <div>
-        {productData.product.data.id ? (
+        {id ? (
           <ProductDetails
             productData={productData.product.data.attributes}
           ></ProductDetails>

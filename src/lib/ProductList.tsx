@@ -16,6 +16,7 @@ import {
   addFavoriteitem,
 } from "@/Reduxtoolkitfeature/CartSlice";
 import { useState } from "react";
+import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated";
 
 interface Props {
   all: any;
@@ -97,6 +98,7 @@ const ProductList: NextPage<Props> = ({ all, dress, bags }) => {
   //   .slice(0, 4)
   //   .concat(productsData.filter((i) => i.category === "bags"));;
   // const [productfiltered, setFilterProduct] = useState(defaultallproduct);
+    const isAuthenticated = useIsAuthenticated();
   return (
     <section>
       <div className="mx-auto px-10 md:px-14">
@@ -140,7 +142,7 @@ const ProductList: NextPage<Props> = ({ all, dress, bags }) => {
                   placeholder="blur"
                   blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAYAAAB/qH1jAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAJ0lEQVR4nGPY2fXjv458/H9Bbtf/IDbD/7v//8/Mvfq/J+nEfxAbAF3NFsFiuaE1AAAAAElFTkSuQmCC"
                   priority
-                  className="object-cover object-top w-full h-auto"
+                  className="object-cover object-top sm:w-full h-auto w-[90%] mx-auto"
                   sizes="(min-width: 1540px) 320px, (min-width: 1280px) 400px, (min-width: 1040px) 350px, (min-width: 780px) 181px, (min-width: 640px) 224px, calc(100vw - 160px)"
                 ></Image>
                 {/* <Image
@@ -170,14 +172,16 @@ const ProductList: NextPage<Props> = ({ all, dress, bags }) => {
                         : "hover:bg-red-600 bg-white hover:text-white hover:rotate-[360deg]"
                     }`}
                     onClick={() => {
-                      dispatch(addFavoriteitem(product));
+                      isAuthenticated && dispatch(addFavoriteitem(product));
                     }}
                   >
                     <LiaHeart />
                   </button>
                   <button
                     onClick={() => {
-                      dispatch(sendUserCartinfo({ product: product, qty: 1 }));
+                      isAuthenticated && dispatch(
+                        sendUserCartinfo({ product: product, qty: 1 })
+                      );
                     }}
                     className={`p-3 rounded-full text-xl translate-y-full group-hover:translate-y-0 duration-300 ease-in-out opacity-0 group-hover:opacity-100 delay-200 ${
                       productCartListid.includes(product.id)

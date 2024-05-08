@@ -37,21 +37,12 @@ export const addFavoriteitem = createAsyncThunk(
   "cart/sendFavoriteitem",
   async (item: any, api: any) => {
     api.dispatch(addToFavorite(item));
-    try {
-       const d = api.getState().cart.FavoriteItems;
 
-      const res = await fetch(`http://localhost:9000/cart`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ FavoriteItems: d }),
-      });
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      console.log("error at adding product to favorite (services) => " + error);
-    }
+    const d = api.getState().cart.FavoriteItems;
+    const localstrorage = localStorage.setItem(
+      "favoriteuser",
+      JSON.stringify(d)
+    );
   }
 );
 export const clearFavoriteList = createAsyncThunk(
@@ -76,28 +67,20 @@ export const clearFavoriteList = createAsyncThunk(
   }
 );
 
+export const fetchDatafavotite = createAsyncThunk(
+  "cart/fetchDatafavotite",
+  async () => {
+    const favoriteuser = localStorage.getItem("favoriteuser");
+    return favoriteuser
+      ? Promise.resolve(JSON.parse(favoriteuser))
+      : Promise.reject();
+  }
+);
 export const fetchDataCart = createAsyncThunk(
   "cart/fetchDataCart",
   async () => {
-    try{ const res = await fetch("http://localhost:9000/cart", {
-      cache: "no-store",
-    });
-    return await res.json();}catch (error) {
-      console.log("error at fetching favorite list (services) => " + error);
-    }
-   
-    // return JSON.parse('{user:"mohamed"}');
-    // try {
-    //     const res = await fetch("http://localhost:9000/cart", {
-    //       cache: "no-store",
-    //     });
-    //     const data = await res.json();
-
-    //     return data;
-    // }
-    // catch(error:any){
-    //     return Promise.reject(error.message);
-    // }
+    const cartuser = localStorage.getItem("cartuser");
+    return cartuser ? Promise.resolve(JSON.parse(cartuser)) : Promise.reject();
   }
 );
 export const CartSlice = createSlice({
@@ -161,10 +144,11 @@ export const CartSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       if (existingIndex >= 0) {
-        state.FavoriteItems = state.FavoriteItems.filter((i: any) => i.id !== action.payload.id)
-      }
-      else{
-        state.FavoriteItems.push(action.payload)
+        state.FavoriteItems = state.FavoriteItems.filter(
+          (i: any) => i.id !== action.payload.id
+        );
+      } else {
+        state.FavoriteItems.push(action.payload);
       }
     },
     deletefromFavoriteList(state) {
@@ -172,9 +156,14 @@ export const CartSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(fetchDataCart.fulfilled, (state, action) => {
-      return action.payload;
-    });
+    builder.addCase(fetchDatafavotite.fulfilled, (state, action) => {
+      // return action.payload;
+      state.FavoriteItems = action.payload;
+    }),
+      builder.addCase(fetchDataCart.fulfilled, (state, action) => {
+        // return action.payload;
+        state.cartItems = action.payload;
+      });
   },
 });
 export const {
