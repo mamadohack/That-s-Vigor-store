@@ -18,7 +18,10 @@ import "swiper/css/navigation";
 import "@/app/globals.css";
 import SlideNextButton from "@/lib/SlideNextButton";
 import SlidePrevButton from "@/lib/SlidePrevButton";
-import { addFavoriteitem, sendUserCartinfo } from "@/Reduxtoolkitfeature/CartSlice";
+import {
+  addFavoriteitem,
+  sendUserCartinfo,
+} from "@/Reduxtoolkitfeature/CartSlice";
 import { useRef, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated";
@@ -26,9 +29,10 @@ import { useRouter } from "next/navigation";
 
 interface Props {
   productData: any;
+  id: number;
 }
 
-const ProductDetails: NextPage<Props> = ({ productData }) => {
+const ProductDetails: NextPage<Props> = ({ productData, id }) => {
   const { toast } = useToast();
   const [thumbsSwiper, setThumbsSwiper] = useState<swiper | null>(null);
   const dispatch = useDispatch<AppDispatch>();
@@ -127,22 +131,24 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
                 })) ||
                 toast({
                   className: "bg-rose-600 text-white font-semibold",
-                  description: "you need to log in to your account to add cart !",
-                }); router.push("/signin");
+                  description:
+                    "you need to log in to your account to add cart !",
+                });
+              router.push("/signin");
             }}
           >
             <h2 className="text-2xl text-gray-900 font-semibold mt-10">
               {productData.title}
             </h2>
             <div className="flex items-center gap-5 mt-1">
-              {/* <span>
-                {Array.from(productData.rating).map((r: string, index) => (
+              <span>
+                {Array(productData.rating).fill(true).map((r: string, index) => (
                   <IoIosStar
                     key={index}
                     className="text-yellow-500 inline-block"
                   />
                 ))}
-              </span> */}
+              </span>
               <span className="text-gray-600 text-sm">153 Order</span>
               {/* <span className="">{productData.condition?.toUpperCase()}</span> */}
             </div>
@@ -217,23 +223,24 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
                 Add to Cart
               </button>
               <button
+                type="button"
                 className="p-3 bg-rose-700 text-white font-semibold text-sm rounded-lg hover:opacity-85 duration-200"
                 onClick={() => {
                   (isAuthenticated &&
-                    dispatch(addFavoriteitem({ attributes: productData })).then(
-                      () => {
-                        toast({
-                          className: "bg-rose-600 text-white font-semibold",
-                          description: "Item saved successfully.",
-                        });
-                      }
-                    )) ||
-                    toast({
+                    dispatch(
+                      addFavoriteitem({ attributes: productData, id })
+                    ).then(() => {
+                      toast({
+                        className: "bg-rose-600 text-white font-semibold",
+                        description: "Item saved successfully.",
+                      });
+                    })) ||
+                    (toast({
                       className: "bg-rose-600 text-white font-semibold",
                       description:
                         "you need to log in to your account to save item !",
-                    });
-                  router.push("/signin");
+                    }) &&
+                      router.push("/signin"));
                 }}
               >
                 Save ❤

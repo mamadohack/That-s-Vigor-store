@@ -48,9 +48,9 @@ const conditonCaseHandler = (condition: string) => {
   return;
 };
 const ProductList: NextPage<Props> = ({ all, dress, bags }) => {
-  const ALLPRODUCTS = all.categories.data[0].attributes.products.data;
-  const DRESSPRODUCTS = dress.categories.data[0].attributes.products.data;
-  const BAGSPRODUCTS = bags.categories.data[0].attributes.products.data;
+  const ALLPRODUCTS = all.categories?.data[0].attributes.products.data;
+  const DRESSPRODUCTS = dress.categories?.data[0].attributes.products.data;
+  const BAGSPRODUCTS = bags.categories?.data[0].attributes.products.data;
   const [PRODUCTLIST, setPRODUCTLIST] = useState(ALLPRODUCTS);
   const dispatch = useDispatch<AppDispatch>();
   const cart = useSelector((state: RootState) => state.cart);
@@ -111,16 +111,34 @@ const ProductList: NextPage<Props> = ({ all, dress, bags }) => {
           </h2>
           <ul className="space-x-5 text-xs md:text-sm flex flex-wrap items-center justify-center gap-2">
             <li className="inline-block border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent">
-              <button onClick={() => {setPRODUCTLIST(ALLPRODUCTS);}}>All</button>
+              <button
+                onClick={() => {
+                  setPRODUCTLIST(ALLPRODUCTS);
+                }}
+              >
+                All
+              </button>
             </li>
             <li className="inline-block border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent">
-              <button onClick={() => {setPRODUCTLIST(DRESSPRODUCTS);}}>Dresses</button>
+              <button
+                onClick={() => {
+                  setPRODUCTLIST(DRESSPRODUCTS);
+                }}
+              >
+                Dresses
+              </button>
             </li>
             {/* <li className="inline-block border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent">
               <button>Men’s</button>
             </li> */}
             <li className="inline-block border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent">
-              <button onClick={() => {setPRODUCTLIST(BAGSPRODUCTS);}}>Bags</button>
+              <button
+                onClick={() => {
+                  setPRODUCTLIST(BAGSPRODUCTS);
+                }}
+              >
+                Bags
+              </button>
             </li>
             <li className="inline-block border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent">
               <button>Accessories</button>
@@ -167,6 +185,7 @@ const ProductList: NextPage<Props> = ({ all, dress, bags }) => {
                   </Link>
                   <button
                     className={`p-3 rounded-full text-xl translate-y-full group-hover:translate-y-0 duration-300 ease-in-out opacity-0 group-hover:opacity-100 delay-200 ${
+                      isAuthenticated &&
                       productFavoriteListid.includes(product.id)
                         ? "bg-red-600 text-white"
                         : "hover:bg-red-600 bg-white hover:text-white hover:rotate-[360deg]"
@@ -179,12 +198,13 @@ const ProductList: NextPage<Props> = ({ all, dress, bags }) => {
                   </button>
                   <button
                     onClick={() => {
-                      isAuthenticated && dispatch(
-                        sendUserCartinfo({ product: product, qty: 1 })
-                      );
+                      isAuthenticated &&
+                        dispatch(
+                          sendUserCartinfo({ product: product, qty: 1 })
+                        );
                     }}
                     className={`p-3 rounded-full text-xl translate-y-full group-hover:translate-y-0 duration-300 ease-in-out opacity-0 group-hover:opacity-100 delay-200 ${
-                      productCartListid.includes(product.id)
+                      isAuthenticated && productCartListid.includes(product.id)
                         ? "bg-red-600 text-white"
                         : "hover:bg-red-600 bg-white hover:text-white hover:rotate-[360deg]"
                     }`}
@@ -196,14 +216,18 @@ const ProductList: NextPage<Props> = ({ all, dress, bags }) => {
               <h2 className="text-center text-sm pt-1">
                 {product.attributes.title}
               </h2>
-              {/* <div className="text-center ">
-                {Array.from(product.rating).map((r: string, index) => (
-                  <IoIosStar
-                    key={index}
-                    className="text-yellow-500 inline-block"
-                  />
-                ))}
-              </div> */}
+              <div className="text-center ">
+                <span>
+                  {Array(product.attributes.rating)
+                    .fill(true)
+                    .map((r: string, index) => (
+                      <IoIosStar
+                        key={index}
+                        className="text-yellow-500 inline-block"
+                      />
+                    ))}
+                </span>
+              </div>
               <h2 className="text-center font-semibold">
                 {product.attributes.price} $
               </h2>

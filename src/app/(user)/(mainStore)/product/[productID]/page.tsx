@@ -39,6 +39,7 @@ const Page: NextPage<Props> = async ({ params: { productID } }) => {
       <div>
         {id ? (
           <ProductDetails
+            id={id}
             productData={productData.product.data.attributes}
           ></ProductDetails>
         ) : (

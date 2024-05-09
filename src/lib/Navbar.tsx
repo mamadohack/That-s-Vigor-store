@@ -42,9 +42,8 @@ const Navbar: NextPage<Props> = ({}) => {
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     setMounted(true);
-    dispatch(fetchDataCart());
-    dispatch(fetchDatafavotite());
-    dispatch(getTotals());
+    dispatch(fetchDataCart()).then((r) => dispatch(getTotals()));
+    dispatch(fetchDatafavotite()).then((r) => dispatch(getTotals()));
   }, [dispatch]);
   return (
     <>
@@ -191,7 +190,7 @@ const Navbar: NextPage<Props> = ({}) => {
                     <li>
                       <Link href="/wishlist">
                         <LiaHeart className="text-2xl inline-block" />
-                        <span
+                       {mounted && isAuthenticated && <span
                           className={`text-sm text-rose-600 ms-1 duration-200 ${
                             cart.FavoriteItems.length > 0
                               ? "opacity-100"
@@ -199,19 +198,23 @@ const Navbar: NextPage<Props> = ({}) => {
                           }`}
                         >
                           {cart?.FavoriteItems.length}
-                        </span>
+                        </span>}
                       </Link>
                     </li>
                     <li>
                       <Link href="/cart">
                         <LiaShoppingBagSolid className="text-2xl inline-block" />
-                        <span
-                          className={`text-sm text-rose-600 ms-1 duration-200 ${
-                            cart.totalQuantity > 0 ? "opacity-100" : "opacity-0"
-                          }`}
-                        >
-                          {cart?.totalQuantity}
-                        </span>
+                        {mounted && isAuthenticated &&
+                          <span
+                            className={`text-sm text-rose-600 ms-1 duration-200 ${
+                              cart.totalQuantity > 0
+                                ? "opacity-100"
+                                : "opacity-0"
+                            }`}
+                          >
+                            {cart?.totalQuantity}
+                          </span>
+                        }
                       </Link>
                     </li>
                   </ul>
@@ -326,10 +329,10 @@ const Navbar: NextPage<Props> = ({}) => {
                 <li
                   className="ps-4 relative group"
                   onMouseEnter={() => {
-                    setShowCart(true);
+                    isAuthenticated && setShowCart(true);
                   }}
                   onMouseLeave={() => {
-                    setShowCart(false);
+                    isAuthenticated && setShowCart(false);
                   }}
                 >
                   <Link href="/cart" className="flex items-center">
@@ -339,13 +342,13 @@ const Navbar: NextPage<Props> = ({}) => {
                       //   setShowCart((p) => !p);
                       // }}
                     />
-                    <span
+                    {mounted && isAuthenticated && <span
                       className={`text-sm text-rose-600 ms-1 duration-200 ${
                         cart.totalQuantity > 0 ? "opacity-100" : "opacity-0"
                       }`}
                     >
                       {cart?.totalQuantity}
-                    </span>
+                    </span>}
                     {/* <div
                         className={`text-xs flex justify-center items-center ${
                           cart?.totalQuantity > 0 ? "opacity-100" : "opacity-0"
@@ -354,7 +357,7 @@ const Navbar: NextPage<Props> = ({}) => {
                         <span>{cart?.totalQuantity}</span>
                       </div> */}
                   </Link>
-                  <div className="bg-white absolute top-auto right-[3%] p-3 space-y-3 hidden group-hover:block w-[350px]">
+                  {mounted && isAuthenticated && <div className="bg-white absolute top-auto right-[3%] p-3 space-y-3 hidden group-hover:block w-[350px]">
                     <h2 className="text-lg font-semibold">Shopping Cart </h2>
                     <div className="max-h-[400px] overflow-x-hidden overflow-y-auto">
                       {cart?.cartItems.length === 0 && (
@@ -384,7 +387,7 @@ const Navbar: NextPage<Props> = ({}) => {
                     >
                       Checkout
                     </Link>
-                  </div>
+                  </div>}
                 </li>
               </ul>
             </div>

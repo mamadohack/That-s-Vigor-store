@@ -13,13 +13,13 @@ import { useToast } from "@/components/ui/use-toast";
 
 
 interface Props {
-  cartInfo: CartItem;
+  cartInfo: any;
   dispatch: any;
 }
 
 const Minicart: NextPage<Props> = ({ cartInfo, dispatch }) => {
   const [state, setState] = useState({
-    price: cartInfo.price * cartInfo.cartQuantity,
+    price: cartInfo.attributes.price * cartInfo.cartQuantity,
     qty: cartInfo.cartQuantity,
   });
   const { toast } = useToast();
@@ -29,7 +29,7 @@ const Minicart: NextPage<Props> = ({ cartInfo, dispatch }) => {
       <div className="">
         <Image
           alt=""
-          src={cartInfo.image[0]}
+          src={`http://localhost:1337${cartInfo.attributes.image.data[0].attributes.url}`}
           width={80}
           height={106}
           sizes="(max-width: 768px) 100vw,
@@ -56,7 +56,9 @@ const Minicart: NextPage<Props> = ({ cartInfo, dispatch }) => {
             ></MdOutlineDeleteOutline>
           </span>
         </h2>
-        <h2 className="text-gray-500 text-xs">{cartInfo.title.slice(0, 20)}</h2>
+        <h2 className="text-gray-500 text-xs">
+          {cartInfo.attributes.title.slice(0, 20)}
+        </h2>
         <p className="space-x-3">
           <span className="text-gray-500 py-1 inline-block text-xs">
             Color: <span className="text-black">Burgundy</span>
@@ -125,7 +127,7 @@ const Minicart: NextPage<Props> = ({ cartInfo, dispatch }) => {
           <span className="text-gray-500 ">
             Subtotal:{" "}
             <span className="text-black">
-              ${cartInfo.cartQuantity * cartInfo.price}
+              ${cartInfo.cartQuantity * cartInfo.attributes.price}
             </span>
           </span>
         </div>

@@ -19,7 +19,7 @@ import AlertCompont from "@/lib/alertCompont";
 import { useToast } from "@/components/ui/use-toast";
 
 interface Props {
-  cartInfo: CartItem;
+  cartInfo: any;
   dispatch: any;
 }
 
@@ -56,8 +56,8 @@ const Cart: NextPage<Props> = ({ cartInfo, dispatch }) => {
     <div className="flex my-5 gap-3">
       <div className="">
         <Image
-          alt=""
-          src={cartInfo.image[0]}
+          alt="product image"
+          src={`http://localhost:1337${cartInfo.attributes.image.data[0].attributes.url}`}
           width={120}
           height={160}
           sizes="(max-width: 768px) 100vw,
@@ -70,9 +70,12 @@ const Cart: NextPage<Props> = ({ cartInfo, dispatch }) => {
         <h2 className="font-bold py-2">
           $ {state.price}
           <span className="float-right text-xl inline-block p-1 cursor-pointer">
-            <AlertCompont remove={() =>{itemRemoveHandler(cartInfo.id);}}>
-              <MdOutlineDeleteOutline
-              ></MdOutlineDeleteOutline>
+            <AlertCompont
+              remove={() => {
+                itemRemoveHandler(cartInfo.id);
+              }}
+            >
+              <MdOutlineDeleteOutline></MdOutlineDeleteOutline>
             </AlertCompont>
           </span>
         </h2>

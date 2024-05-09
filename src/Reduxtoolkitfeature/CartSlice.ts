@@ -17,20 +17,8 @@ export const sendUserCartinfo = createAsyncThunk(
   async (item: any, api: any) => {
     api.dispatch(addToCart(item));
     api.dispatch(getTotals());
-    try {
-      let d = api.getState();
-      const res = await fetch(`http://localhost:9000/cart`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(d.cart),
-      });
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      console.log("error at adding product to cart (services) => " + error);
-    }
+    const d = api.getState().cart.cartItems;
+    const localstrorage = localStorage.setItem("cartuser", JSON.stringify(d));
   }
 );
 export const addFavoriteitem = createAsyncThunk(
@@ -102,7 +90,7 @@ export const CartSlice = createSlice({
         //   position: "bottom-left",
         // });
       } else {
-        let tempProductItem = { ...action.payload.product, cartQuantity: 1 };
+        let tempProductItem = { ...action.payload.product, cartQuantity: action.payload?.qty || 1 };
         state.cartItems.push(tempProductItem);
         // toast.success("Product added to cart", {
         //   position: "bottom-left",
@@ -112,7 +100,7 @@ export const CartSlice = createSlice({
     getTotals(state) {
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
-          const { price, cartQuantity } = cartItem;
+          const { attributes:{price}, cartQuantity } = cartItem;
           const itemTotal = price * cartQuantity;
 
           cartTotal.total += itemTotal;
