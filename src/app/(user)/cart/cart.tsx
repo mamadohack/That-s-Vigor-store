@@ -1,14 +1,12 @@
 import { NextPage } from "next";
 import Image from "next/image";
-import { useRef, useState, useMemo,useEffect } from "react";
+import { useRef, useState, useMemo, useEffect, useCallback } from "react";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import { CartItem } from "@/lib/types";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { sendData } from "@/store";
-import {
-  fetchDataCart,
-} from "@/Reduxtoolkitfeature/CartSlice";
+import { fetchDataCart } from "@/Reduxtoolkitfeature/CartSlice";
 
 import {
   updateQty,
@@ -24,11 +22,11 @@ interface Props {
 }
 
 const Cart: NextPage<Props> = ({ cartInfo, dispatch }) => {
-    const { toast } = useToast();
+  const { toast } = useToast();
 
-  console.log('cart rendedred')
+  console.log("cart rendedred");
   const [state, setState] = useState({
-    price: cartInfo.price * cartInfo.cartQuantity,
+    price: cartInfo.attributes.price * cartInfo.cartQuantity,
     qty: cartInfo.cartQuantity,
   }); //{ price: productData.price, qty: 1 }
   // useEffect(() => {
@@ -36,21 +34,20 @@ const Cart: NextPage<Props> = ({ cartInfo, dispatch }) => {
   //   dispatch(getTotals());
   // }, [state.qty]);
   const inputQTY = useRef<HTMLInputElement | null>(null);
-  useEffect(() => {
-    dispatch(updateQty({ qty: state.qty, id: cartInfo.id }));
-    dispatch(getTotals());
-    sendData();
-  }, [state.qty]);
-
-  const itemRemoveHandler = (id:number) => {
+  const update = useCallback(() => {
+    dispatch(updateQty({ qty: state.qty, id: cartInfo.id }))
+      .then((r: any) => dispatch(getTotals()))
+      .then((r: any) => sendData());
+  }, [state.qty,cartInfo.id,dispatch]);
+  const itemRemoveHandler = (id: number) => {
     dispatch(deleteItem(id));
     dispatch(getTotals());
     sendData().then(() => {
-                toast({
-                  className: "bg-rose-600 text-white font-semibold",
-                  description: "Item deleted successfully.",
-                });
-              });;
+      toast({
+        className: "bg-rose-600 text-white font-semibold",
+        description: "Item deleted successfully.",
+      });
+    });
   };
   return (
     <div className="flex my-5 gap-3">
@@ -100,7 +97,7 @@ const Cart: NextPage<Props> = ({ cartInfo, dispatch }) => {
                   setState((p) => {
                     return {
                       qty: p.qty - 1,
-                      price: p.price - cartInfo.price,
+                      price: p.price - cartInfo.attributes.price,
                     };
                   });
                 }
@@ -129,7 +126,7 @@ const Cart: NextPage<Props> = ({ cartInfo, dispatch }) => {
                 setState((p) => {
                   return {
                     qty: p.qty + 1,
-                    price: p.price + cartInfo.price,
+                    price: p.price + cartInfo.attributes.price,
                   };
                 });
 

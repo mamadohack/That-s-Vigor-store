@@ -5,7 +5,7 @@ import { LiaHeart } from "react-icons/lia";
 import { LiaShoppingBagSolid } from "react-icons/lia";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/store";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { LuAlignJustify } from "react-icons/lu";
 import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated";
 import { LiaUserCircle } from "react-icons/lia";
@@ -40,7 +40,9 @@ const Navbar: NextPage<Props> = ({}) => {
   const background = useRef<HTMLDivElement | null>(null);
   const cart = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch<AppDispatch>();
+  console.log(isAuthenticated)
   useEffect(() => {
+    console.log("authentication");
     setMounted(true);
     dispatch(fetchDataCart()).then((r) => dispatch(getTotals()));
     dispatch(fetchDatafavotite()).then((r) => dispatch(getTotals()));
@@ -49,6 +51,7 @@ const Navbar: NextPage<Props> = ({}) => {
     <>
       <div className="w-full z-20 relative bg-white">
         <nav className=" border-gray-200 ">
+          <button onClick={()=>{console.log(isAuthenticated)}}>zz</button>
           <div className=" px-5 flex flex-wrap items-center justify-between mx-auto">
             <a
               href="/"
