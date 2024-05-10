@@ -1,4 +1,19 @@
-preview video : [Youtube Link](https://www.youtube.com/watch?v=nwvPqte6V8E)
+## i'm happy to show you my ecommerce project in next js
+ technology and libraries used:
+* Tailwindcss.
+* full Responsive in multiple screen sizes ..
+* Graphql with Apollo/client in Client Component and Native Fetch Query in Server component.
+* Redux Toolkit.
+* redux-thunk.
+* Js-cookie.
+* react-auth-kit for Authentication.
+* react-hook-form.
+* Zod for FormValidation.
+* react-icons.
+* react-rating.
+* swiper.
+* toast.
+preview video(Enjoy) : [Youtube Link](https://www.youtube.com/watch?v=nwvPqte6V8E)
 -------------------
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
