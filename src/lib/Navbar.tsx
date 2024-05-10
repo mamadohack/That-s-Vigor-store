@@ -16,6 +16,7 @@ import {
   getTotals,
   clearFavoriteList,
   fetchDatafavotite,
+  signout as sigout
 } from "@/Reduxtoolkitfeature/CartSlice";
 import Link from "next/link";
 import Minicart from "./minicart";
@@ -25,9 +26,9 @@ import useSignOut from "react-auth-kit/hooks/useSignOut";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 
-interface Props {}
+interface Props { }
 
-const Navbar: NextPage<Props> = ({}) => {
+const Navbar: NextPage<Props> = ({ }) => {
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
   console.log("navbar rendered");
@@ -37,12 +38,9 @@ const Navbar: NextPage<Props> = ({}) => {
   const signout = useSignOut();
   const [showCart, setShowCart] = useState(false);
   const [collabseNavbar, setcollabseNavbar] = useState(false);
-  const background = useRef<HTMLDivElement | null>(null);
   const cart = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch<AppDispatch>();
-  console.log(isAuthenticated)
   useEffect(() => {
-    console.log("authentication");
     setMounted(true);
     dispatch(fetchDataCart()).then((r) => dispatch(getTotals()));
     dispatch(fetchDatafavotite()).then((r) => dispatch(getTotals()));
@@ -51,7 +49,6 @@ const Navbar: NextPage<Props> = ({}) => {
     <>
       <div className="w-full z-20 relative bg-white">
         <nav className=" border-gray-200 ">
-          <button onClick={()=>{console.log(isAuthenticated)}}>zz</button>
           <div className=" px-5 flex flex-wrap items-center justify-between mx-auto">
             <a
               href="/"
@@ -113,9 +110,8 @@ const Navbar: NextPage<Props> = ({}) => {
               </svg> */}
             </button>
             <div
-              className={`${
-                collabseNavbar ? "block" : "hidden"
-              } w-full lg:block lg:w-auto`}
+              className={`${collabseNavbar ? "block" : "hidden"
+                } w-full lg:block lg:w-auto`}
               id="navbar-default"
             >
               <ul className="font-medium flex flex-col px-7 py-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 lg:flex-row lg:space-x-4 rtl:space-x-reverse lg:mt-0 lg:border-0 lg:bg-white ">
@@ -193,12 +189,11 @@ const Navbar: NextPage<Props> = ({}) => {
                     <li>
                       <Link href="/wishlist">
                         <LiaHeart className="text-2xl inline-block" />
-                       {mounted && isAuthenticated && <span
-                          className={`text-sm text-rose-600 ms-1 duration-200 ${
-                            cart.FavoriteItems.length > 0
-                              ? "opacity-100"
-                              : "opacity-0"
-                          }`}
+                        {mounted && isAuthenticated && <span
+                          className={`text-sm text-rose-600 ms-1 duration-200 ${cart.FavoriteItems.length > 0
+                            ? "opacity-100"
+                            : "opacity-0"
+                            }`}
                         >
                           {cart?.FavoriteItems.length}
                         </span>}
@@ -209,11 +204,10 @@ const Navbar: NextPage<Props> = ({}) => {
                         <LiaShoppingBagSolid className="text-2xl inline-block" />
                         {mounted && isAuthenticated &&
                           <span
-                            className={`text-sm text-rose-600 ms-1 duration-200 ${
-                              cart.totalQuantity > 0
-                                ? "opacity-100"
-                                : "opacity-0"
-                            }`}
+                            className={`text-sm text-rose-600 ms-1 duration-200 ${cart.totalQuantity > 0
+                              ? "opacity-100"
+                              : "opacity-0"
+                              }`}
                           >
                             {cart?.totalQuantity}
                           </span>
@@ -243,6 +237,7 @@ const Navbar: NextPage<Props> = ({}) => {
                         className="block p-2 w-full font-semibold text-black border-black border"
                         onClick={() => {
                           signout();
+                          dispatch(sigout());
                           router.push("/signin");
                         }}
                       >
@@ -282,11 +277,10 @@ const Navbar: NextPage<Props> = ({}) => {
                     <LiaHeart className="text-2xl h-[115px]" />
                     {mounted && isAuthenticated && (
                       <span
-                        className={`text-sm text-rose-600 ms-1 duration-200 ${
-                          cart.FavoriteItems.length > 0
-                            ? "opacity-100"
-                            : "opacity-0"
-                        }`}
+                        className={`text-sm text-rose-600 ms-1 duration-200 ${cart.FavoriteItems.length > 0
+                          ? "opacity-100"
+                          : "opacity-0"
+                          }`}
                       >
                         {cart?.FavoriteItems.length}
                       </span>
@@ -341,14 +335,13 @@ const Navbar: NextPage<Props> = ({}) => {
                   <Link href="/cart" className="flex items-center">
                     <LiaShoppingBagSolid
                       className="text-2xl cursor-pointer h-[115px]"
-                      // onClick={() => {
-                      //   setShowCart((p) => !p);
-                      // }}
+                    // onClick={() => {
+                    //   setShowCart((p) => !p);
+                    // }}
                     />
                     {mounted && isAuthenticated && <span
-                      className={`text-sm text-rose-600 ms-1 duration-200 ${
-                        cart.totalQuantity > 0 ? "opacity-100" : "opacity-0"
-                      }`}
+                      className={`text-sm text-rose-600 ms-1 duration-200 ${cart.totalQuantity > 0 ? "opacity-100" : "opacity-0"
+                        }`}
                     >
                       {cart?.totalQuantity}
                     </span>}

@@ -5,11 +5,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, useState } from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import useSignIn from "react-auth-kit/hooks/useSignIn";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { signin } from "@/Reduxtoolkitfeature/CartSlice";
+import Loading from "@/app/loading";
 
 const Page = ({}) => {
+  const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const LOGIN_MUTATION = gql`
     mutation Login($identifier: String!, $password: String!) {
@@ -59,6 +64,7 @@ const Page = ({}) => {
             username: data.login.user.username
           },
         });
+        dispatch(signin());
         router.push("/")
       }
     } catch (error) {
@@ -122,7 +128,7 @@ const Page = ({}) => {
           <button className=" underline text-xs font-semibold">
             Forgot your password?
           </button>
-          {loading && <p>loadiiiiiiiiiiiiiiiiiiiing</p>}
+          {loading && <div className="loaderxx mx-auto my-10"></div>}
           {error && <p className="text-semibold text-red-700">Wrong User ID or Password !</p>}
         </form>
       </div>

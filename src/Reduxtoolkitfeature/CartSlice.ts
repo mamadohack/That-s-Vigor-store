@@ -1,11 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
+import Cookie from "js-cookie";
 const initialState: {
+  Authstats:any;
   FavoriteItems: any[];
   cartItems: any[];
   totalQuantity: number;
   totalPrice: number;
 } = {
+  Authstats: Cookie.get("__auth_state") ? true : false ,
   FavoriteItems: [],
   cartItems: [],
   totalQuantity: 0,
@@ -75,6 +77,12 @@ export const CartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    signin(state){
+      state.Authstats = true;
+    },
+    signout(state){
+      state.Authstats = false;
+    },
     addToCart(state, action) {
       const existingIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.product.id
@@ -161,5 +169,7 @@ export const {
   deleteItem,
   addToFavorite,
   deletefromFavoriteList,
+  signin,
+  signout
 } = CartSlice.actions;
 export default CartSlice.reducer;

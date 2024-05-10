@@ -48,9 +48,9 @@ const conditonCaseHandler = (condition: string) => {
   return;
 };
 const ProductList: NextPage<Props> = ({ all, dress, bags }) => {
-  const ALLPRODUCTS = all.categories?.data[0].attributes.products.data;
-  const DRESSPRODUCTS = dress.categories?.data[0].attributes.products.data;
-  const BAGSPRODUCTS = bags.categories?.data[0].attributes.products.data;
+  const ALLPRODUCTS = all?.categories?.data[0].attributes.products.data;
+  const DRESSPRODUCTS = dress?.categories?.data[0].attributes.products.data;
+  const BAGSPRODUCTS = bags?.categories?.data[0].attributes.products.data;
   const [PRODUCTLIST, setPRODUCTLIST] = useState(ALLPRODUCTS);
   const dispatch = useDispatch<AppDispatch>();
   const cart = useSelector((state: RootState) => state.cart);

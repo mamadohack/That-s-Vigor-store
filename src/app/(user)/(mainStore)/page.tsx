@@ -119,14 +119,13 @@ export default async function Home() {
         }
       }
     `;
-  
     const all = await fetchingproduct(allQuery);
     const dress = await fetchingproduct(dressQuery);
     const bags = await fetchingproduct(bagsQuery)
   return (
     <main className="">
       <Homepage />
-      <ProductList all={all} dress={dress} bags ={bags} />
+      {all && dress && bags && <ProductList all={all} dress={dress} bags ={bags} />}
       <Banner />
       <Discount />
     </main>
