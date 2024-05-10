@@ -14,9 +14,15 @@
 * swiper.
 * toast.
 ![1](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/ca320e71-25c3-4dda-b5cc-4ff5a8b11a11)
+![2](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/f8dcb89c-311c-4ff4-814b-4495ac0b846f)
+![3](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/fc8ff8b6-38d1-4b8a-bc0a-aebdec401822)
 ![4](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/570c2565-633e-42cc-89f7-4f1a7da98caf)
 ![5](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/dbf675e9-48ed-4b5d-9819-fb2e151ea549)
 ![6](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/93600f52-2b63-46de-af23-efdc44e5574c)
+![7](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/7f8be021-2c91-44e7-9af5-5d8924b57665)
+![8](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/9a094d99-a6f7-4435-9d62-6794dae6b43d)
+![9](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/5d6688fd-b7fb-4ba8-89ad-69a659d0b69c)
+![10](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/f6335d8f-4d2e-469b-9437-605ca1c92edb)
 
 
 preview video(Enjoy) : [Youtube Link](https://www.youtube.com/watch?v=nwvPqte6V8E)
