@@ -18,15 +18,21 @@ import "swiper/css/navigation";
 import "@/app/globals.css";
 import SlideNextButton from "@/lib/SlideNextButton";
 import SlidePrevButton from "@/lib/SlidePrevButton";
-import { sendUserCartinfo } from "@/Reduxtoolkitfeature/CartSlice";
+import {
+  addFavoriteitem,
+  sendUserCartinfo,
+} from "@/Reduxtoolkitfeature/CartSlice";
 import { useRef, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated";
+import { useRouter } from "next/navigation";
 
 interface Props {
-  productData: ProductListAPiType;
+  productData: any;
+  id: number;
 }
 
-const ProductDetails: NextPage<Props> = ({ productData }) => {
+const ProductDetails: NextPage<Props> = ({ productData, id }) => {
   const { toast } = useToast();
   const [thumbsSwiper, setThumbsSwiper] = useState<swiper | null>(null);
   const dispatch = useDispatch<AppDispatch>();
@@ -34,14 +40,16 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
   const inputQTY = useRef<HTMLInputElement | null>(null);
   const selectQTY = useRef<HTMLSelectElement | null>(null);
   const [state, setState] = useState({ price: productData.price, qty: 1 });
-  const slides = productData.image.map((img, index) => (
+  const isAuthenticated = useIsAuthenticated();
+  const router = useRouter();
+  const slides = productData.image.data.map((img: any, index: number) => (
     <SwiperSlide key={index}>
       <Image
-        src={img}
+        src={`http://localhost:1337${img.attributes.url}`}
         // width={350}
         // height={466}
-        width={640}
-        height={853}
+        width={img.attributes.width}
+        height={img.attributes.height}
         alt="img"
         priority
         sizes="(max-width: 768px) 100vw,
@@ -51,13 +59,15 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
       ></Image>
     </SwiperSlide>
   ));
-  const slidesThumb = productData.image.map((img, index) => (
+  const slidesThumb = productData.image.data.map((img: any, index: number) => (
     <SwiperSlide key={index} className="max-h-[100px]">
       {/* <ImageSlide img={img}></ImageSlide> */}
       <Image
-        src={img}
-        width={350}
-        height={466}
+        src={`http://localhost:1337${img.attributes.url}`}
+        // width={350}
+        // height={466}
+        width={img.attributes.width}
+        height={img.attributes.height}
         alt="img"
         priority
         className="object-contain ms-auto block h-[80px] w-[80px] p-1 "
@@ -109,15 +119,22 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              console.log(e.currentTarget)
-              dispatch(
-                sendUserCartinfo({ product: productData, qty: state.qty })
-              ).then(() => {
+
+              (isAuthenticated &&
+                dispatch(
+                  sendUserCartinfo({ product: productData, qty: state.qty })
+                ).then(() => {
+                  toast({
+                    className: "bg-rose-600 text-white font-semibold",
+                    description: "Item added to your card successfully.",
+                  });
+                })) ||
                 toast({
                   className: "bg-rose-600 text-white font-semibold",
-                  description: "Item added to your card successfully.",
+                  description:
+                    "you need to log in to your account to add cart !",
                 });
-              });
+              router.push("/signin");
             }}
           >
             <h2 className="text-2xl text-gray-900 font-semibold mt-10">
@@ -125,7 +142,7 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
             </h2>
             <div className="flex items-center gap-5 mt-1">
               <span>
-                {Array.from(productData.rating).map((r: string, index) => (
+                {Array(productData.rating).fill(true).map((r: string, index) => (
                   <IoIosStar
                     key={index}
                     className="text-yellow-500 inline-block"
@@ -133,7 +150,7 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
                 ))}
               </span>
               <span className="text-gray-600 text-sm">153 Order</span>
-              <span className="">{productData.condition?.toUpperCase()}</span>
+              {/* <span className="">{productData.condition?.toUpperCase()}</span> */}
             </div>
             <h2 className="font-semibold mt-3 text-lg">{state.price}$</h2>
             <p className="mt-3 text-pretty text-gray-700 ">
@@ -201,16 +218,29 @@ const ProductDetails: NextPage<Props> = ({ productData }) => {
             <div className="flex items-center gap-5 mt-3 ps-3 ">
               <button
                 className="p-3 bg-gray-700 text-white font-semibold text-sm rounded-lg hover:opacity-85 duration-200"
-                onClick={() => {
-                  
-                }}
+                type="submit"
               >
                 Add to Cart
               </button>
               <button
+                type="button"
                 className="p-3 bg-rose-700 text-white font-semibold text-sm rounded-lg hover:opacity-85 duration-200"
                 onClick={() => {
-                  console.log(selectQTY.current!.value);
+                  (isAuthenticated &&
+                    dispatch(
+                      addFavoriteitem({ attributes: productData, id })
+                    ).then(() => {
+                      toast({
+                        className: "bg-rose-600 text-white font-semibold",
+                        description: "Item saved successfully.",
+                      });
+                    })) ||
+                    (toast({
+                      className: "bg-rose-600 text-white font-semibold",
+                      description:
+                        "you need to log in to your account to save item !",
+                    }) &&
+                      router.push("/signin"));
                 }}
               >
                 Save ❤

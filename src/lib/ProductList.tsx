@@ -9,14 +9,19 @@ import { LiaShoppingBagSolid } from "react-icons/lia";
 import { IoIosStar } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
+import { useQuery, gql } from "@apollo/client";
+
 import {
   sendUserCartinfo,
   addFavoriteitem,
 } from "@/Reduxtoolkitfeature/CartSlice";
 import { useState } from "react";
+import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated";
 
 interface Props {
-  productsData: ProductListAPiType[];
+  all: any;
+  dress: any;
+  bags: any;
 }
 const conditonCaseHandler = (condition: string) => {
   if (condition.toLowerCase() === "new") {
@@ -42,7 +47,11 @@ const conditonCaseHandler = (condition: string) => {
   }
   return;
 };
-const ProductList: NextPage<Props> = ({ productsData }) => {
+const ProductList: NextPage<Props> = ({ all, dress, bags }) => {
+  const ALLPRODUCTS = all?.categories?.data[0].attributes.products.data;
+  const DRESSPRODUCTS = dress?.categories?.data[0].attributes.products.data;
+  const BAGSPRODUCTS = bags?.categories?.data[0].attributes.products.data;
+  const [PRODUCTLIST, setPRODUCTLIST] = useState(ALLPRODUCTS);
   const dispatch = useDispatch<AppDispatch>();
   const cart = useSelector((state: RootState) => state.cart);
   const productCartListid: number[] = [];
@@ -53,9 +62,43 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
   cart.FavoriteItems.forEach((e) => {
     productFavoriteListid.push(e.id);
   });
-  const [productfiltered, setFilterProduct] = useState(
-    productsData.filter((i) => i.category === "dress")
-  );
+  // const products = gql`
+  //   query {
+  //     products {
+  //       data {
+  //         id
+  //         attributes {
+  //           title
+  //           price
+  //           category {
+  //             data {
+  //               attributes {
+  //                 name
+  //               }
+  //             }
+  //           }
+  //           image {
+  //             data {
+  //               attributes {
+  //                 url
+  //                 height
+  //                 width
+  //                 previewUrl
+  //               }
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `;
+  // const { data } = useQuery(products);
+  // const defaultallproduct = productsData
+  //   .filter((i) => i.category === "dress")
+  //   .slice(0, 4)
+  //   .concat(productsData.filter((i) => i.category === "bags"));;
+  // const [productfiltered, setFilterProduct] = useState(defaultallproduct);
+    const isAuthenticated = useIsAuthenticated();
   return (
     <section>
       <div className="mx-auto px-10 md:px-14">
@@ -68,14 +111,18 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
           </h2>
           <ul className="space-x-5 text-xs md:text-sm flex flex-wrap items-center justify-center gap-2">
             <li className="inline-block border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent">
-              <button>All</button>
+              <button
+                onClick={() => {
+                  setPRODUCTLIST(ALLPRODUCTS);
+                }}
+              >
+                All
+              </button>
             </li>
             <li className="inline-block border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent">
               <button
                 onClick={() => {
-                  setFilterProduct(
-                    productsData.filter((i) => i.category === "dress")
-                  );
+                  setPRODUCTLIST(DRESSPRODUCTS);
                 }}
               >
                 Dresses
@@ -87,9 +134,7 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
             <li className="inline-block border-b-2 duration-200 ease-in-out hover:border-[#ca1515] border-transparent">
               <button
                 onClick={() => {
-                  setFilterProduct(
-                    productsData.filter((i) => i.category === "bags")
-                  );
+                  setPRODUCTLIST(BAGSPRODUCTS);
                 }}
               >
                 Bags
@@ -104,21 +149,32 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
           </ul>
         </div>
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-8">
-          {productfiltered?.map((product: ProductListAPiType) => (
+          {PRODUCTLIST?.map((product: any) => (
             <div key={product.id} className="space-y-2 group">
               <div className="relative">
                 <Image
-                  src={product.image[0]} //640 × 853
+                  src={`http://localhost:1337${product.attributes.image.data[0].attributes.url}`} //640 × 853
+                  width={product.attributes.image.data[0].attributes.width}
+                  height={product.attributes.image.data[0].attributes.height}
+                  alt={"producttitle"}
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAYAAAB/qH1jAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAJ0lEQVR4nGPY2fXjv458/H9Bbtf/IDbD/7v//8/Mvfq/J+nEfxAbAF3NFsFiuaE1AAAAAElFTkSuQmCC"
+                  priority
+                  className="object-cover object-top sm:w-full h-auto w-[90%] mx-auto"
+                  sizes="(min-width: 1540px) 320px, (min-width: 1280px) 400px, (min-width: 1040px) 350px, (min-width: 780px) 181px, (min-width: 640px) 224px, calc(100vw - 160px)"
+                ></Image>
+                {/* <Image
+                  src={`http://localhost:1337${product.attributes.image.data[0].attributes.url}`} //640 × 853
                   width={640}
                   height={853}
-                  alt={product.title}
-                  // placeholder="blur"
-                  // blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAYAAAB/qH1jAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAJ0lEQVR4nGPY2fXjv458/H9Bbtf/IDbD/7v//8/Mvfq/J+nEfxAbAF3NFsFiuaE1AAAAAElFTkSuQmCC"
+                  alt={"producttitle"}
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAYAAAB/qH1jAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAJ0lEQVR4nGPY2fXjv458/H9Bbtf/IDbD/7v//8/Mvfq/J+nEfxAbAF3NFsFiuaE1AAAAAElFTkSuQmCC"
                   priority
                   className="object-cover object-top w-full h-auto"
                   sizes="(min-width: 1540px) 320px, (min-width: 1280px) 400px, (min-width: 1040px) 350px, (min-width: 780px) 181px, (min-width: 640px) 224px, calc(100vw - 160px)"
-                ></Image>
-                {product?.condition && conditonCaseHandler(product.condition)}
+                ></Image> */}
+                {/* {product?.condition && conditonCaseHandler(product.condition)} */}
 
                 <div className=" absolute bottom-1/4 left-1/2 -translate-x-1/2 space-x-2 min-w-max">
                   <Link
@@ -129,22 +185,26 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
                   </Link>
                   <button
                     className={`p-3 rounded-full text-xl translate-y-full group-hover:translate-y-0 duration-300 ease-in-out opacity-0 group-hover:opacity-100 delay-200 ${
+                      isAuthenticated &&
                       productFavoriteListid.includes(product.id)
                         ? "bg-red-600 text-white"
                         : "hover:bg-red-600 bg-white hover:text-white hover:rotate-[360deg]"
                     }`}
                     onClick={() => {
-                      dispatch(addFavoriteitem(product));
+                      isAuthenticated && dispatch(addFavoriteitem(product));
                     }}
                   >
                     <LiaHeart />
                   </button>
                   <button
                     onClick={() => {
-                      dispatch(sendUserCartinfo({ product: product, qty: 1 }));
+                      isAuthenticated &&
+                        dispatch(
+                          sendUserCartinfo({ product: product, qty: 1 })
+                        );
                     }}
                     className={`p-3 rounded-full text-xl translate-y-full group-hover:translate-y-0 duration-300 ease-in-out opacity-0 group-hover:opacity-100 delay-200 ${
-                      productCartListid.includes(product.id)
+                      isAuthenticated && productCartListid.includes(product.id)
                         ? "bg-red-600 text-white"
                         : "hover:bg-red-600 bg-white hover:text-white hover:rotate-[360deg]"
                     }`}
@@ -153,16 +213,24 @@ const ProductList: NextPage<Props> = ({ productsData }) => {
                   </button>
                 </div>
               </div>
-              <h2 className="text-center text-sm pt-1">{product.title}</h2>
+              <h2 className="text-center text-sm pt-1">
+                {product.attributes.title}
+              </h2>
               <div className="text-center ">
-                {Array.from(product.rating).map((r: string, index) => (
-                  <IoIosStar
-                    key={index}
-                    className="text-yellow-500 inline-block"
-                  />
-                ))}
+                <span>
+                  {Array(product.attributes.rating)
+                    .fill(true)
+                    .map((r: string, index) => (
+                      <IoIosStar
+                        key={index}
+                        className="text-yellow-500 inline-block"
+                      />
+                    ))}
+                </span>
               </div>
-              <h2 className="text-center font-semibold">{product.price} $</h2>
+              <h2 className="text-center font-semibold">
+                {product.attributes.price} $
+              </h2>
             </div>
           ))}
         </div>

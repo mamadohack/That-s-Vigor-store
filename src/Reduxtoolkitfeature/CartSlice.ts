@@ -1,11 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
+import Cookie from "js-cookie";
 const initialState: {
+  Authstats:any;
   FavoriteItems: any[];
   cartItems: any[];
   totalQuantity: number;
   totalPrice: number;
 } = {
+  Authstats: Cookie.get("__auth_state") ? true : false ,
   FavoriteItems: [],
   cartItems: [],
   totalQuantity: 0,
@@ -17,41 +19,20 @@ export const sendUserCartinfo = createAsyncThunk(
   async (item: any, api: any) => {
     api.dispatch(addToCart(item));
     api.dispatch(getTotals());
-    try {
-      let d = api.getState();
-      const res = await fetch(`http://localhost:9000/cart`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(d.cart),
-      });
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      console.log("error at adding product to cart (services) => " + error);
-    }
+    const d = api.getState().cart.cartItems;
+    const localstrorage = localStorage.setItem("cartuser", JSON.stringify(d));
   }
 );
 export const addFavoriteitem = createAsyncThunk(
   "cart/sendFavoriteitem",
   async (item: any, api: any) => {
     api.dispatch(addToFavorite(item));
-    try {
-       const d = api.getState().cart.FavoriteItems;
 
-      const res = await fetch(`http://localhost:9000/cart`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ FavoriteItems: d }),
-      });
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      console.log("error at adding product to favorite (services) => " + error);
-    }
+    const d = api.getState().cart.FavoriteItems;
+    const localstrorage = localStorage.setItem(
+      "favoriteuser",
+      JSON.stringify(d)
+    );
   }
 );
 export const clearFavoriteList = createAsyncThunk(
@@ -76,34 +57,32 @@ export const clearFavoriteList = createAsyncThunk(
   }
 );
 
+export const fetchDatafavotite = createAsyncThunk(
+  "cart/fetchDatafavotite",
+  async () => {
+    const favoriteuser = localStorage.getItem("favoriteuser");
+    return favoriteuser
+      ? Promise.resolve(JSON.parse(favoriteuser))
+      : Promise.reject();
+  }
+);
 export const fetchDataCart = createAsyncThunk(
   "cart/fetchDataCart",
   async () => {
-    try{ const res = await fetch("http://localhost:9000/cart", {
-      cache: "no-store",
-    });
-    return await res.json();}catch (error) {
-      console.log("error at fetching favorite list (services) => " + error);
-    }
-   
-    // return JSON.parse('{user:"mohamed"}');
-    // try {
-    //     const res = await fetch("http://localhost:9000/cart", {
-    //       cache: "no-store",
-    //     });
-    //     const data = await res.json();
-
-    //     return data;
-    // }
-    // catch(error:any){
-    //     return Promise.reject(error.message);
-    // }
+    const cartuser = localStorage.getItem("cartuser");
+    return cartuser ? Promise.resolve(JSON.parse(cartuser)) : Promise.reject();
   }
 );
 export const CartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    signin(state){
+      state.Authstats = true;
+    },
+    signout(state){
+      state.Authstats = false;
+    },
     addToCart(state, action) {
       const existingIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.product.id
@@ -119,7 +98,7 @@ export const CartSlice = createSlice({
         //   position: "bottom-left",
         // });
       } else {
-        let tempProductItem = { ...action.payload.product, cartQuantity: 1 };
+        let tempProductItem = { ...action.payload.product, cartQuantity: action.payload?.qty || 1 };
         state.cartItems.push(tempProductItem);
         // toast.success("Product added to cart", {
         //   position: "bottom-left",
@@ -129,7 +108,7 @@ export const CartSlice = createSlice({
     getTotals(state) {
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
-          const { price, cartQuantity } = cartItem;
+          const { attributes:{price}, cartQuantity } = cartItem;
           const itemTotal = price * cartQuantity;
 
           cartTotal.total += itemTotal;
@@ -161,10 +140,11 @@ export const CartSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       if (existingIndex >= 0) {
-        state.FavoriteItems = state.FavoriteItems.filter((i: any) => i.id !== action.payload.id)
-      }
-      else{
-        state.FavoriteItems.push(action.payload)
+        state.FavoriteItems = state.FavoriteItems.filter(
+          (i: any) => i.id !== action.payload.id
+        );
+      } else {
+        state.FavoriteItems.push(action.payload);
       }
     },
     deletefromFavoriteList(state) {
@@ -172,9 +152,14 @@ export const CartSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(fetchDataCart.fulfilled, (state, action) => {
-      return action.payload;
-    });
+    builder.addCase(fetchDatafavotite.fulfilled, (state, action) => {
+      // return action.payload;
+      state.FavoriteItems = action.payload;
+    }),
+      builder.addCase(fetchDataCart.fulfilled, (state, action) => {
+        // return action.payload;
+        state.cartItems = action.payload;
+      });
   },
 });
 export const {
@@ -184,5 +169,7 @@ export const {
   deleteItem,
   addToFavorite,
   deletefromFavoriteList,
+  signin,
+  signout
 } = CartSlice.actions;
 export default CartSlice.reducer;

@@ -6,7 +6,7 @@ import { AppDispatch, RootState } from "@/store";
 import Cart from "./cart";
 import { CartItem } from "@/lib/types";
 import AlertCompont from "@/lib/alertCompont";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchDataCart } from "@/Reduxtoolkitfeature/CartSlice";
 import { GrSecure } from "react-icons/gr";
 import { FaCaretRight } from "react-icons/fa";
@@ -16,14 +16,17 @@ import {
   getTotals,
   deleteItem,
 } from "@/Reduxtoolkitfeature/CartSlice";
+import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated";
 
 interface Props {}
 const Page: NextPage<Props> = ({}) => {
   const dispatch = useDispatch<AppDispatch>();
+  const [mounted, setMounted] = useState(false);
+  const isAuthenticated = useIsAuthenticated();
   const cart = useSelector((state: RootState) => state.cart);
   useEffect(() => {
     const t = dispatch(fetchDataCart());
-    t.then((r: any) => {
+    t.then(() => {
       return dispatch(getTotals());
     });
   }, [dispatch]);
@@ -47,10 +50,11 @@ const Page: NextPage<Props> = ({}) => {
             </span>
           </span>
         </div>
-        <Link href={"/"}><div className="text-xs text-gray-500 mt-5">
-          Continue Shopping <FaCaretRight className="inline-block" />{" "}
-        </div></Link>
-       
+        <Link href={"/"}>
+          <div className="text-xs text-gray-500 mt-5">
+            Continue Shopping <FaCaretRight className="inline-block" />{" "}
+          </div>
+        </Link>
       </nav>
       <div className="md:px-20 px-10 mb-20 mt-10">
         <div className="flex flex-wrap gap-5 md:flex-row flex-col">
@@ -60,7 +64,7 @@ const Page: NextPage<Props> = ({}) => {
               {cart.cartItems.length === 0 && (
                 <h2 className="py-2">Oops, your cart is empty!</h2>
               )}
-              {cart.cartItems.map((item: CartItem, index) => {
+              {cart.cartItems.map((item: any, index) => {
                 return (
                   <Cart key={index} cartInfo={item} dispatch={dispatch}></Cart>
                 );

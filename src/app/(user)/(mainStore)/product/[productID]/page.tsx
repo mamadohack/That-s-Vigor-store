@@ -1,32 +1,50 @@
 import { NextPage } from "next";
 import { ProductListAPiType } from "@/lib/types";
 import ProductDetails from "./productDetails";
-
+import { fetchingproduct } from "../../page";
+import { gql } from "@apollo/client";
+import { print } from "graphql/language/printer";
 
 interface Props {
   params: { productID: any };
 }
-const fetchingproductitem = async (productID:number) => {
-  try {
-    const response = await fetch(
-      `http://localhost:9000/products/${productID}`,
-      {
-        cache: "no-store",
-      }
-    );
-    return response.json();
-  } catch (error) {
-    console.log("error at fetching product details (services) => " + error);
-  }
-};
 const Page: NextPage<Props> = async ({ params: { productID } }) => {
-  const productData: ProductListAPiType = await fetchingproductitem(productID);
+  const ProductQuery = gql`
+    query Product($id: ID!) {
+      product(id: $id) {
+        data {
+          id
+          attributes {
+            title
+            image {
+              data {
+                attributes {
+                  width
+                  height
+                  url
+                }
+              }
+            }
+            price
+            rating
+          }
+        }
+      }
+    }
+  `;
+  const productData = await fetchingproduct(ProductQuery, { id: productID });
+  const id = productData?.product?.data?.id;
   console.log(productID);
     return (
       <div>
-        {productData.id ? (
-          <ProductDetails productData={productData}></ProductDetails>
-        ):<p>wrong path</p>}
+        {id ? (
+          <ProductDetails
+            id={id}
+            productData={productData.product.data.attributes}
+          ></ProductDetails>
+        ) : (
+          <p>wrong path</p>
+        )}
       </div>
     );
 };

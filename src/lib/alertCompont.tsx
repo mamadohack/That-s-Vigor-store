@@ -36,14 +36,8 @@ const AlertCompont: NextPage<Props> = ({children,remove}) => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction className="bg-rose-600 text-white">
-              <button
-                onClick={() => {
-                  remove();
-                }}
-              >
+            <AlertDialogAction className=" text-white bg-rose-600" onClick={() =>{remove()}}>
                 Continue
-              </button>
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
