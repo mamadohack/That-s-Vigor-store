@@ -13,6 +13,12 @@
 * react-rating.
 * swiper.
 * toast.
+![1](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/ca320e71-25c3-4dda-b5cc-4ff5a8b11a11)
+![4](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/570c2565-633e-42cc-89f7-4f1a7da98caf)
+![5](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/dbf675e9-48ed-4b5d-9819-fb2e151ea549)
+![6](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/93600f52-2b63-46de-af23-efdc44e5574c)
+
+
 preview video(Enjoy) : [Youtube Link](https://www.youtube.com/watch?v=nwvPqte6V8E)
 -------------------
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
