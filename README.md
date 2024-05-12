@@ -13,6 +13,7 @@
 * react-rating.
 * swiper.
 * toast.
+![209](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/28a06db3-9fb7-4090-8781-686d67904bd8)
 ![1](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/ca320e71-25c3-4dda-b5cc-4ff5a8b11a11)
 ![2](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/f8dcb89c-311c-4ff4-814b-4495ac0b846f)
 ![3](https://github.com/mamadohack/That-s-Vigor-store/assets/147258336/fc8ff8b6-38d1-4b8a-bc0a-aebdec401822)
